@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -176,13 +177,22 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
 
         //至于当月的第一天
         calendar.set(Calendar.DAY_OF_MONTH, 1);
+
         //获取当月第一天是星期几
         int day_of_week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+
+
+        int maxDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Log.e("MnCalendar", "maxDays:" + maxDays);
+
         //移动到需要绘制的第一天
         calendar.add(Calendar.DAY_OF_MONTH, -day_of_week);
 
+        float weeks = (maxDays + day_of_week) / 7f;
+
+
         //6*7
-        while (mDatas.size() < 6 * 7) {
+        while (mDatas.size() < (weeks > 5 ? 6 : 5) * 7) {
             mDatas.add(calendar.getTime());
             //向前移动一天
             calendar.add(Calendar.DAY_OF_MONTH, 1);

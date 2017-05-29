@@ -9,8 +9,7 @@
     <RelativeLayout
         android:id="@+id/rl_title_view"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/mn_calendar_color_bg_title">
+        android:layout_height="50dp">
 
         <ImageView
             android:id="@+id/btn_left"

@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="36dp"
-    android:background="@color/mn_calendar_color_bg_weekend_title"
-    android:orientation="horizontal">
+     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tv_week_01"

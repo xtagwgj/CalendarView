@@ -9,8 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xtagwgj.calendar.adapter.MNCalendarVerticalAdapter;
+import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarRangeChooseListener;
 import com.xtagwgj.calendar.model.MNCalendarVerticalConfig;
+import com.xtagwgj.calendar.view.MNGestureView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,11 +24,12 @@ import java.util.HashMap;
  * 垂直方向的日历
  */
 
-public class MNCalendarVertical extends LinearLayout {
+public class MNCalendarVertical extends LinearLayout implements MNGestureView.OnSwipeListener {
 
     private Context context;
 
     private RecyclerView recyclerViewCalendar;
+    private MNGestureView mnGestureView;
     private LinearLayout ll_week;
     private TextView tv_week_01;
     private TextView tv_week_02;
@@ -43,6 +46,7 @@ public class MNCalendarVertical extends LinearLayout {
     private HashMap<String, ArrayList<Date>> dataMap;
 
     private OnCalendarRangeChooseListener onCalendarRangeChooseListener;
+    private OnCalendarChangeListener onCalendarChangeListener;
 
     public MNCalendarVertical(Context context) {
         this(context, null);
@@ -62,8 +66,6 @@ public class MNCalendarVertical extends LinearLayout {
 
         initViews();
 
-        initCalendarDatas();
-
     }
 
 
@@ -71,6 +73,7 @@ public class MNCalendarVertical extends LinearLayout {
         //绑定View
         View.inflate(context, R.layout.mn_layout_calendar_vertical, this);
         recyclerViewCalendar = (RecyclerView) findViewById(R.id.recyclerViewCalendar);
+        mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
         ll_week = (LinearLayout) findViewById(R.id.ll_week);
         tv_week_01 = (TextView) findViewById(R.id.tv_week_01);
         tv_week_02 = (TextView) findViewById(R.id.tv_week_02);
@@ -82,13 +85,12 @@ public class MNCalendarVertical extends LinearLayout {
 
         ll_week.setBackgroundColor(mnCalendarVerticalConfig.getMnCalendar_colorWeekendTitleBg());
 
+        //手势监听
+        mnGestureView.setOnSwipeListener(this);
+
         //初始化RecycleerView
         recyclerViewCalendar.setLayoutManager(new LinearLayoutManager(context));
         recyclerViewCalendar.setBackgroundColor(mnCalendarVerticalConfig.getMnCalendar_colorBg());
-    }
-
-
-    private void initCalendarDatas() {
 
         //星期栏的显示和隐藏
         boolean mnCalendar_showWeek = mnCalendarVerticalConfig.isMnCalendar_showWeek();
@@ -105,8 +107,17 @@ public class MNCalendarVertical extends LinearLayout {
             ll_week.setVisibility(View.GONE);
         }
 
+        initCalendarDatas();
+    }
+
+
+    private void initCalendarDatas() {
         //日期集合
-        dataMap = new HashMap<>();
+        if (dataMap == null)
+            dataMap = new HashMap<>();
+        else
+            dataMap.clear();
+
         //计算日期
         int mnCalendar_countMonth = mnCalendarVerticalConfig.getMnCalendar_countMonth();
         for (int i = 0; i < mnCalendar_countMonth; i++) {
@@ -147,6 +158,28 @@ public class MNCalendarVertical extends LinearLayout {
 
     }
 
+    /**
+     * 切换到下个月
+     */
+    public void setNextMonth() {
+        currentCalendar.add(Calendar.MONTH, 1);
+        initViews();
+        if (onCalendarChangeListener != null) {
+            onCalendarChangeListener.nextMonth();
+        }
+    }
+
+    /**
+     * 切换到上个月
+     */
+    public void setLastMonth() {
+        currentCalendar.add(Calendar.MONTH, -1);
+        initViews();
+        if (onCalendarChangeListener != null) {
+            onCalendarChangeListener.lastMonth();
+        }
+    }
+
     private void initAdapter() {
         if (mnCalendarVerticalAdapter == null) {
             mnCalendarVerticalAdapter = new MNCalendarVerticalAdapter(context, dataMap, currentCalendar, mnCalendarVerticalConfig);
@@ -177,4 +210,23 @@ public class MNCalendarVertical extends LinearLayout {
         }
     }
 
+    /**
+     * 设置改变的监听
+     *
+     * @param onCalendarChangeListener
+     */
+    public void setOnCalendarChangeListener(OnCalendarChangeListener onCalendarChangeListener) {
+        this.onCalendarChangeListener = onCalendarChangeListener;
+    }
+
+
+    @Override
+    public void rightSwipe() {
+        setLastMonth();
+    }
+
+    @Override
+    public void leftSwipe() {
+        setNextMonth();
+    }
 }

@@ -8,6 +8,7 @@
         android:id="@+id/ll_week"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/mn_calendar_color_bg_weekend_title"
         android:orientation="vertical">
 
         <include layout="@layout/mn_layout_week" />
@@ -19,8 +20,13 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewCalendar"
-        style="@style/style_calendar" />
+    <com.xtagwgj.calendar.view.MNGestureView
+        android:id="@+id/mnGestureView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewCalendar"
+            style="@style/style_calendar" />
+    </com.xtagwgj.calendar.view.MNGestureView>
 </LinearLayout>

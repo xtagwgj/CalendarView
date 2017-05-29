@@ -25,36 +25,41 @@ public class MNCalendarVerticalConfig {
     private boolean mnCalendar_showLunar = true;
     //是否显示星期栏
     private boolean mnCalendar_showWeek = true;
-    //每个月标题的样式
-    private String mnCalendar_titleFormat = "yyyy年MM月";
-    //每个月标题的颜色
-    private int mnCalendar_colorTitle = Color.parseColor("#FFFFFF");
-    //每个月标题的背景颜色
-    private int mnCalendar_colorTitleBg = Color.parseColor("#191B1F");
-    //星期几的背景颜色
-    private int mnCalendar_colorWeekendTitleBg = Color.parseColor("#191B1F");
-    //日历的背景颜色
-    private int mnCalendar_colorBg = Color.parseColor("#191B1F");
-    //星期栏的颜色
-    private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
-    //阳历的颜色
-    private int mnCalendar_colorSolar = Color.parseColor("#FFFFFF");
-    //阴历的颜色
-    private int mnCalendar_colorLunar = Color.parseColor("#191B1F");
-    //今天之前的日期的颜色
-    private int mnCalendar_colorBeforeToday = Color.parseColor("#FFFFFF");
-    //开始结束的背景颜色
-    private int mnCalendar_colorStartAndEndBg = Color.parseColor("#df174254");
-    //区间中间的背景颜色
-    private int mnCalendar_colorRangeBg = Color.parseColor("#d0174254");
-    //区间文字的颜色
-    private int mnCalendar_colorRangeText = Color.parseColor("#FFFFFF");
-    //显示多少月(默认6个月)
-    private int mnCalendar_countMonth = 6;
     //今天的显示方式
     private int mnCalendar_showTodayType = SHOW_TODAY_TEXT;
     //日期选择的方式
     private int mnCalendar_chooseType = MULTI;
+    //显示多少月(默认1个月)
+    private int mnCalendar_countMonth = 1;
+
+
+    //每个月标题的样式
+    private String mnCalendar_titleFormat = "yyyy年MM月";
+    //每个月标题的颜色
+    private int mnCalendar_colorTitle = Color.parseColor("#282828");
+    //每个月标题的背景颜色
+    private int mnCalendar_colorTitleBg = Color.parseColor("#FFFFFF");
+
+    //星期几的背景颜色
+    private int mnCalendar_colorWeekendTitleBg = Color.parseColor("#FFFFFF");
+
+    //日历的背景颜色
+    private int mnCalendar_colorBg = Color.parseColor("#FFFFFF");
+    //星期栏的颜色
+    private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
+    //阳历的颜色
+    private int mnCalendar_colorSolar = Color.parseColor("#282828");
+    //阴历的颜色
+    private int mnCalendar_colorLunar = Color.parseColor("#979797");
+    //今天之前的日期的颜色
+    private int mnCalendar_colorBeforeToday = Color.parseColor("#979797");
+    //开始结束的背景颜色
+    private int mnCalendar_colorStartAndEndBg = Color.parseColor("#df0e0e0e");
+    //区间中间的背景颜色
+    private int mnCalendar_colorRangeBg = Color.parseColor("#df0e0e0e");
+    //选择区间文字的颜色
+    private int mnCalendar_colorRangeText = Color.parseColor("#FFFFFF");
+
 
     @IntDef({SHOW_TODAY_TEXT, SHOW_TODAY_DRAWABLE})
     @Retention(RetentionPolicy.SOURCE)
@@ -238,7 +243,7 @@ public class MNCalendarVerticalConfig {
             this.mnCalendarConfig = new MNCalendarVerticalConfig();
         }
 
-        public Builder setMnCalendar_chooseType(int mnCalendar_chooseType) {
+        public Builder setMnCalendar_chooseType(@ChooseType int mnCalendar_chooseType) {
             mnCalendarConfig.setMnCalendar_chooseType(mnCalendar_chooseType);
             return this;
         }
@@ -281,50 +286,50 @@ public class MNCalendarVerticalConfig {
         }
 
 
-        public Builder setMnCalendar_colorTitle(String mnCalendar_colorTitle) {
-            mnCalendarConfig.setMnCalendar_colorTitle(Color.parseColor(mnCalendar_colorTitle));
+        public Builder setMnCalendar_colorTitle(int mnCalendar_colorTitle) {
+            mnCalendarConfig.setMnCalendar_colorTitle(mnCalendar_colorTitle);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorWeek(String mnCalendar_colorWeek) {
-            mnCalendarConfig.setMnCalendar_colorWeek(Color.parseColor(mnCalendar_colorWeek));
+        public Builder setMnCalendar_colorWeek(int mnCalendar_colorWeek) {
+            mnCalendarConfig.setMnCalendar_colorWeek(mnCalendar_colorWeek);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorSolar(String mnCalendar_colorSolar) {
-            mnCalendarConfig.setMnCalendar_colorSolar(Color.parseColor(mnCalendar_colorSolar));
+        public Builder setMnCalendar_colorSolar(int mnCalendar_colorSolar) {
+            mnCalendarConfig.setMnCalendar_colorSolar(mnCalendar_colorSolar);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorLunar(String mnCalendar_colorLunar) {
-            mnCalendarConfig.setMnCalendar_colorLunar(Color.parseColor(mnCalendar_colorLunar));
+        public Builder setMnCalendar_colorLunar(int mnCalendar_colorLunar) {
+            mnCalendarConfig.setMnCalendar_colorLunar(mnCalendar_colorLunar);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorBeforeToday(String mnCalendar_colorBeforeToday) {
-            mnCalendarConfig.setMnCalendar_colorBeforeToday(Color.parseColor(mnCalendar_colorBeforeToday));
+        public Builder setMnCalendar_colorBeforeToday(int mnCalendar_colorBeforeToday) {
+            mnCalendarConfig.setMnCalendar_colorBeforeToday(mnCalendar_colorBeforeToday);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorStartAndEndBg(String mnCalendar_colorStartAndEndBg) {
-            mnCalendarConfig.setMnCalendar_colorStartAndEndBg(Color.parseColor(mnCalendar_colorStartAndEndBg));
+        public Builder setMnCalendar_colorStartAndEndBg(int mnCalendar_colorStartAndEndBg) {
+            mnCalendarConfig.setMnCalendar_colorStartAndEndBg(mnCalendar_colorStartAndEndBg);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorRangeBg(String mnCalendar_colorRangeBg) {
-            mnCalendarConfig.setMnCalendar_colorRangeBg(Color.parseColor(mnCalendar_colorRangeBg));
+        public Builder setMnCalendar_colorRangeBg(int mnCalendar_colorRangeBg) {
+            mnCalendarConfig.setMnCalendar_colorRangeBg(mnCalendar_colorRangeBg);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorRangeText(String mnCalendar_colorRangeText) {
-            mnCalendarConfig.setMnCalendar_colorRangeText(Color.parseColor(mnCalendar_colorRangeText));
+        public Builder setMnCalendar_colorRangeText(int mnCalendar_colorRangeText) {
+            mnCalendarConfig.setMnCalendar_colorRangeText(mnCalendar_colorRangeText);
             return this;
         }
 
