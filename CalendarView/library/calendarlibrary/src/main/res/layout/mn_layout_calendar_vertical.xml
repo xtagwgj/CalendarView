@@ -21,9 +21,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewCalendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingEnd="6dp"
-        android:paddingStart="6dp" />
+        style="@style/style_calendar" />
 
 </LinearLayout>

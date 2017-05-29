@@ -1,7 +1,6 @@
 package com.xtagwgj.calendarviewtest;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private Context context;
 
@@ -37,10 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 .setMnCalendar_showLunar(false)                  //是否显示阴历
                 .setMnCalendar_titleFormat("yyyy-MM")           //每个月的标题样式
                 .setMnCalendar_countMonth(1)                    //显示多少月(默认6个月)
-                .setMnCalendar_colorTitleBg(Color.parseColor("#191B1F"))
-                .setMnCalendar_colorWeekendTitleBg(Color.parseColor("#191B1F"))
-                .setMnCalendar_colorBg(Color.parseColor("#191B1F"))
-                .setMnCalendar_colorTitle("#FFFFFF")
                 .setMnCalendar_showTodayType(MNCalendarVerticalConfig.SHOW_TODAY_DRAWABLE)//今天的显示方式
                 .build();
         mnCalendarVertical.setConfig(mnCalendarVerticalConfig);

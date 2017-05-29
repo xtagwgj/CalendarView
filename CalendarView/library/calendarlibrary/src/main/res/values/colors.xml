@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--星期的颜色值-->
-    <color name="mn_calendar_color_text_week">#5E5E5E</color>
-    <!--日历Item的阳历的颜色值-->
-    <color name="mn_calendar_color_text_solar">#282828</color>
-    <!--日历Item的阴历的颜色值-->
-    <color name="mn_calendar_color_text_lunar">#979797</color>
-    <!--日历今天圆形背景-->
-    <color name="mn_calendar_color_today_bg">#282828</color>
     <!--线-->
     <color name="mn_calendar_color_line">#CCCCCC</color>
     <!--白色-->
     <color name="mn_calendar_color_white">#FFFFFF</color>
-    <!--不是当前月份的阳历的颜色-->
-    <color name="mn_calendar_color_other_month">#979797</color>
 
-    <!--日历 蓝色-->
+    <!--日历 当天的圆点 蓝色-->
     <color name="mn_calendar_color_today_blue">#23B7F3</color>
 
     <!--白灰色-->
     <color name="mn_calendar_color_gray_white">#dfdfdf</color>
+
+
+    <!--标题栏的背景色-->
+    <color name="mn_calendar_color_bg_title">#191B1F</color>
+    <!--星期的颜色值-->
+    <color name="mn_calendar_color_text_week">#FFFFFF</color>
+
+
+
+    <!--星期的背景-->
+    <color name="mn_calendar_color_bg_weekend_title">#191B1F</color>
+    <color name="mn_calendar_color_weekend_title_text">#5E5E5E</color>
+
+
+
+    <!--日期的背景-->
+    <color name="mn_calendar_color_bg">#191B1F</color>
+    <!--日历今天圆形背景-->
+    <color name="mn_calendar_color_today_bg">#174254</color>
+    <!--不是当前月份的阳历的颜色-->
+    <color name="mn_calendar_color_other_month">#979797</color>
+    <!--日历Item的阳历的颜色值-->
+    <color name="mn_calendar_color_text_solar">#FFFFFF</color>
+    <!--日历Item的阴历的颜色值-->
+    <color name="mn_calendar_color_text_lunar">#191B1F</color>
 
 </resources>

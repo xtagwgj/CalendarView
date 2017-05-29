@@ -110,7 +110,7 @@ public class MNCalendarVerticalItemAdapter extends RecyclerView.Adapter<Recycler
             if (now_yyy_mm_dd.equals(position_yyy_MM_dd)) {
                 if (mnCalendarVerticalConfig.getMnCalendar_showTodayType() == MNCalendarVerticalConfig.SHOW_TODAY_TEXT) {
                     myViewHolder.tvDay.setText("今天");
-                    myViewHolder.todayImageView.setVisibility(View.GONE);
+                    myViewHolder.todayImageView.setVisibility(View.INVISIBLE);
                 } else {
                     myViewHolder.tv_small.setVisibility(View.GONE);
                     myViewHolder.todayImageView.setImageDrawable(context.getResources().getDrawable(R.drawable.circle_today_drawable));
@@ -127,8 +127,8 @@ public class MNCalendarVerticalItemAdapter extends RecyclerView.Adapter<Recycler
             if (adapter.startDate != null && adapter.startDate == datePosition) {
                 myViewHolder.iv_bg.setVisibility(View.VISIBLE);
                 myViewHolder.iv_bg.setBackgroundResource(R.drawable.mn_selected_bg_start);
-                myViewHolder.tv_small.setVisibility(View.VISIBLE);
-                myViewHolder.tv_small.setText("开始");
+//                myViewHolder.tv_small.setVisibility(View.VISIBLE);
+//                myViewHolder.tv_small.setText("开始");
                 myViewHolder.tvDay.setTextColor(mnCalendarVerticalConfig.getMnCalendar_colorRangeText());
                 myViewHolder.tv_small.setTextColor(mnCalendarVerticalConfig.getMnCalendar_colorRangeText());
                 //动态修改颜色
@@ -138,8 +138,8 @@ public class MNCalendarVerticalItemAdapter extends RecyclerView.Adapter<Recycler
             if (adapter.endDate != null && adapter.endDate == datePosition) {
                 myViewHolder.iv_bg.setVisibility(View.VISIBLE);
                 myViewHolder.iv_bg.setBackgroundResource(R.drawable.mn_selected_bg_end);
-                myViewHolder.tv_small.setVisibility(View.VISIBLE);
-                myViewHolder.tv_small.setText("结束");
+//                myViewHolder.tv_small.setVisibility(View.VISIBLE);
+//                myViewHolder.tv_small.setText("结束");
                 myViewHolder.tvDay.setTextColor(mnCalendarVerticalConfig.getMnCalendar_colorRangeText());
                 myViewHolder.tv_small.setTextColor(mnCalendarVerticalConfig.getMnCalendar_colorRangeText());
                 //动态修改颜色
@@ -194,8 +194,6 @@ public class MNCalendarVerticalItemAdapter extends RecyclerView.Adapter<Recycler
                     //刷新
                     notifyDataSetChanged();
                     adapter.notifyDataSetChanged();
-
-
                 }
             });
 

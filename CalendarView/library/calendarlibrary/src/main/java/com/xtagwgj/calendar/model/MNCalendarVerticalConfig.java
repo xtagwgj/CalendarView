@@ -13,9 +13,13 @@ import java.lang.annotation.RetentionPolicy;
 
 public class MNCalendarVerticalConfig {
 
+    //当天日期的显示方式
     public static final int SHOW_TODAY_TEXT = 1;
-
     public static final int SHOW_TODAY_DRAWABLE = 2;
+
+    //选择日期的的方式
+    public static final int SINGLE = 0;
+    public static final int MULTI = 1;
 
     //是否显示阴历
     private boolean mnCalendar_showLunar = true;
@@ -24,31 +28,33 @@ public class MNCalendarVerticalConfig {
     //每个月标题的样式
     private String mnCalendar_titleFormat = "yyyy年MM月";
     //每个月标题的颜色
-    private int mnCalendar_colorTitle = Color.parseColor("#282828");
+    private int mnCalendar_colorTitle = Color.parseColor("#FFFFFF");
     //每个月标题的背景颜色
-    private int mnCalendar_colorTitleBg = Color.parseColor("#FFFFFF");
+    private int mnCalendar_colorTitleBg = Color.parseColor("#191B1F");
     //星期几的背景颜色
-    private int mnCalendar_colorWeekendTitleBg = Color.parseColor("#FFFFFF");
+    private int mnCalendar_colorWeekendTitleBg = Color.parseColor("#191B1F");
     //日历的背景颜色
-    private int mnCalendar_colorBg = Color.parseColor("#FFFFFF");
+    private int mnCalendar_colorBg = Color.parseColor("#191B1F");
     //星期栏的颜色
     private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
     //阳历的颜色
-    private int mnCalendar_colorSolar = Color.parseColor("#282828");
+    private int mnCalendar_colorSolar = Color.parseColor("#FFFFFF");
     //阴历的颜色
-    private int mnCalendar_colorLunar = Color.parseColor("#979797");
+    private int mnCalendar_colorLunar = Color.parseColor("#191B1F");
     //今天之前的日期的颜色
-    private int mnCalendar_colorBeforeToday = Color.parseColor("#979797");
+    private int mnCalendar_colorBeforeToday = Color.parseColor("#FFFFFF");
     //开始结束的背景颜色
-    private int mnCalendar_colorStartAndEndBg = Color.parseColor("#df0e0e0e");
+    private int mnCalendar_colorStartAndEndBg = Color.parseColor("#df174254");
     //区间中间的背景颜色
-    private int mnCalendar_colorRangeBg = Color.parseColor("#d0353535");
+    private int mnCalendar_colorRangeBg = Color.parseColor("#d0174254");
     //区间文字的颜色
     private int mnCalendar_colorRangeText = Color.parseColor("#FFFFFF");
     //显示多少月(默认6个月)
     private int mnCalendar_countMonth = 6;
     //今天的显示方式
     private int mnCalendar_showTodayType = SHOW_TODAY_TEXT;
+    //日期选择的方式
+    private int mnCalendar_chooseType = MULTI;
 
     @IntDef({SHOW_TODAY_TEXT, SHOW_TODAY_DRAWABLE})
     @Retention(RetentionPolicy.SOURCE)
@@ -56,7 +62,22 @@ public class MNCalendarVerticalConfig {
 
     }
 
+    @IntDef({SINGLE, MULTI})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ChooseType {
+
+    }
+
+
     private MNCalendarVerticalConfig() {
+    }
+
+    public int getMnCalendar_chooseType() {
+        return mnCalendar_chooseType;
+    }
+
+    public void setMnCalendar_chooseType(int mnCalendar_chooseType) {
+        this.mnCalendar_chooseType = mnCalendar_chooseType;
     }
 
     public int getMnCalendar_colorTitleBg() {
@@ -194,6 +215,7 @@ public class MNCalendarVerticalConfig {
                 ", mnCalendar_showWeek=" + mnCalendar_showWeek +
                 ", mnCalendar_colorTitleBg=" + mnCalendar_colorTitleBg +
                 ", mnCalendar_colorBg=" + mnCalendar_colorBg +
+                ", mnCalendar_chooseType=" + mnCalendar_chooseType +
                 ", mnCalendar_colorWeekendTitleBg=" + mnCalendar_colorWeekendTitleBg +
                 ", mnCalendar_titleFormat='" + mnCalendar_titleFormat + '\'' +
                 ", mnCalendar_colorTitle=" + mnCalendar_colorTitle +
@@ -214,6 +236,11 @@ public class MNCalendarVerticalConfig {
 
         public Builder() {
             this.mnCalendarConfig = new MNCalendarVerticalConfig();
+        }
+
+        public Builder setMnCalendar_chooseType(int mnCalendar_chooseType) {
+            mnCalendarConfig.setMnCalendar_chooseType(mnCalendar_chooseType);
+            return this;
         }
 
         public Builder setMnCalendar_colorWeekendTitleBg(int mnCalendar_colorWeekendTitleBg) {
