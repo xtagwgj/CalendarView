@@ -32,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         mnCalendar = (MNCalendar) findViewById(R.id.mnCalendar);
 
+        MNCalendarConfig build = new MNCalendarConfig.Builder()
+                .setMnCalendar_showLunar(true)
+                .setMnCalendar_showWeek(true)
+                .setMnCalendar_showOtherMonthInfo(false)
+                .build();
+        mnCalendar.setConfig(build);
+
         /**
          * Item点击监听
          */
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMnCalendar_colorTitle("#FF0000")
                         .setMnCalendar_showLunar(true)
                         .setMnCalendar_showWeek(true)
+                        .setMnCalendar_showOtherMonthInfo(false)
                         .build();
                 mnCalendar.setConfig(build);
                 break;

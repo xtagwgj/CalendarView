@@ -29,6 +29,7 @@ public class MNCalendarConfig {
     private boolean mnCalendar_showLunar = true;
     private boolean mnCalendar_showWeek = true;
     private boolean mnCalendar_showTitle = true;
+    private boolean mnCalendar_showOtherMonthInfo = true;
     private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
     private int mnCalendar_colorSolar = Color.parseColor("#282828");
     private int mnCalendar_colorLunar = Color.parseColor("#979797");
@@ -37,7 +38,16 @@ public class MNCalendarConfig {
     private int mnCalendar_colorTodayText = Color.parseColor("#FFFFFF");
     private int mnCalendar_colorTitle = Color.parseColor("#282828");
 
+
     private MNCalendarConfig() {
+    }
+
+    public boolean isMnCalendar_showOtherMonthInfo() {
+        return mnCalendar_showOtherMonthInfo;
+    }
+
+    public void setMnCalendar_showOtherMonthInfo(boolean mnCalendar_showOtherMonthInfo) {
+        this.mnCalendar_showOtherMonthInfo = mnCalendar_showOtherMonthInfo;
     }
 
     public boolean isMnCalendar_showTitle() {
@@ -123,6 +133,7 @@ public class MNCalendarConfig {
     @Override
     public String toString() {
         return "MNCalendarConfig{" +
+                "mnCalendar_showOtherMonthInfo=" + mnCalendar_showOtherMonthInfo +
                 "mnCalendar_showLunar=" + mnCalendar_showLunar +
                 ", mnCalendar_showWeek=" + mnCalendar_showWeek +
                 ", mnCalendar_showTitle=" + mnCalendar_showTitle +
@@ -141,6 +152,11 @@ public class MNCalendarConfig {
 
         public Builder() {
             this.mnCalendarConfig = new MNCalendarConfig();
+        }
+
+        public Builder setMnCalendar_showOtherMonthInfo(boolean mnCalendar_showOtherMonthInfo) {
+            this.mnCalendarConfig.setMnCalendar_showOtherMonthInfo(mnCalendar_showOtherMonthInfo);
+            return this;
         }
 
         public Builder setMnCalendar_showTitle(boolean mnCalendar_showTitle) {

@@ -82,7 +82,10 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             Date nowDate = new Date();
             String now_yyy_MM_dd = sdf.format(nowDate);
             String position_yyy_MM_dd = sdf.format(datePosition);
-            if (now_yyy_MM_dd.equals(position_yyy_MM_dd)) {
+
+            if (now_yyy_MM_dd.equals(position_yyy_MM_dd)
+                    && (datePosition.getMonth() == currentDate.getMonth() ||
+                    (datePosition.getMonth() != currentDate.getMonth() && mnCalendarConfig.isMnCalendar_showOtherMonthInfo()))) {
                 myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                 myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
                 myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
@@ -94,6 +97,8 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             //阴历的显示
             if (mnCalendarConfig.isMnCalendar_showLunar()) {
+
+
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(datePosition);
                 int year = cal.get(Calendar.YEAR);
@@ -102,8 +107,14 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 LunarCalendarUtils.Lunar solarToLunar = LunarCalendarUtils.solarToLunar(new LunarCalendarUtils.Solar(year, month, day));
                 String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar.lunarDay);
                 myViewHolder.tvDay_lunar.setText(lunarDayString);
+                myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
             } else {
                 myViewHolder.tvDay_lunar.setVisibility(View.GONE);
+            }
+
+            if (datePosition.getMonth() != currentDate.getMonth() && !mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
+                myViewHolder.tvDay_lunar.setVisibility(View.GONE);
+                myViewHolder.tvDay.setVisibility(View.GONE);
             }
 
             if (this.onCalendarItemClickListener != null) {
