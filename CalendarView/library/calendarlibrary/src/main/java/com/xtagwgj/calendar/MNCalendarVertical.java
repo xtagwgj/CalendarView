@@ -12,7 +12,6 @@ import com.xtagwgj.calendar.adapter.MNCalendarVerticalAdapter;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarRangeChooseListener;
 import com.xtagwgj.calendar.model.MNCalendarVerticalConfig;
-import com.xtagwgj.calendar.view.MNGestureView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,12 +23,11 @@ import java.util.HashMap;
  * 垂直方向的日历
  */
 
-public class MNCalendarVertical extends LinearLayout implements MNGestureView.OnSwipeListener {
+public class MNCalendarVertical extends LinearLayout {
 
     private Context context;
 
     private RecyclerView recyclerViewCalendar;
-    private MNGestureView mnGestureView;
     private LinearLayout ll_week;
     private TextView tv_week_01;
     private TextView tv_week_02;
@@ -73,7 +71,6 @@ public class MNCalendarVertical extends LinearLayout implements MNGestureView.On
         //绑定View
         View.inflate(context, R.layout.mn_layout_calendar_vertical, this);
         recyclerViewCalendar = (RecyclerView) findViewById(R.id.recyclerViewCalendar);
-        mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
         ll_week = (LinearLayout) findViewById(R.id.ll_week);
         tv_week_01 = (TextView) findViewById(R.id.tv_week_01);
         tv_week_02 = (TextView) findViewById(R.id.tv_week_02);
@@ -84,9 +81,6 @@ public class MNCalendarVertical extends LinearLayout implements MNGestureView.On
         tv_week_07 = (TextView) findViewById(R.id.tv_week_07);
 
         ll_week.setBackgroundColor(mnCalendarVerticalConfig.getMnCalendar_colorWeekendTitleBg());
-
-        //手势监听
-        mnGestureView.setOnSwipeListener(this);
 
         //初始化RecycleerView
         recyclerViewCalendar.setLayoutManager(new LinearLayoutManager(context));
@@ -220,13 +214,4 @@ public class MNCalendarVertical extends LinearLayout implements MNGestureView.On
     }
 
 
-    @Override
-    public void rightSwipe() {
-        setLastMonth();
-    }
-
-    @Override
-    public void leftSwipe() {
-        setNextMonth();
-    }
 }

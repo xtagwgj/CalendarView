@@ -1,6 +1,7 @@
 package com.xtagwgj.calendarviewtest;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import com.xtagwgj.calendar.model.MNCalendarConfig;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
         MNCalendarConfig build = new MNCalendarConfig.Builder()
                 .setMnCalendar_showLunar(true)
                 .setMnCalendar_showWeek(true)
-                .setMnCalendar_showOtherMonthInfo(false)
+                .setMnCalendar_showOtherMonthInfo(true)
+                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
+                .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
                 .build();
         mnCalendar.setConfig(build);
 
@@ -45,14 +49,23 @@ public class MainActivity extends AppCompatActivity {
         mnCalendar.setOnCalendarItemClickListener(new OnCalendarItemClickListener() {
 
             @Override
-            public void onClick(Date date) {
-                Toast.makeText(context, "单击:" + sdf2.format(mnCalendar.getCurrentDate()), Toast.LENGTH_SHORT).show();
+            public void onSingleChoose(Date date) {
+                Toast.makeText(context, "单击:" + sdf2.format(date.getTime()), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onLongClick(Date date) {
-                Toast.makeText(context, "长按:" + sdf2.format(mnCalendar.getCurrentDate()), Toast.LENGTH_SHORT).show();
+            public void onMultiChoose(ArrayList<Date> dateArrayList) {
+                Toast.makeText(context, "单击:" + dateArrayList.size(), Toast.LENGTH_SHORT).show();
+
             }
+
+            @Override
+            public void onRangeChoose(Date startDate, Date endDate) {
+                Toast.makeText(context, "单击:" + sdf2.format(startDate.getTime()) + "到" + sdf2.format(endDate.getTime()), Toast.LENGTH_SHORT).show();
+
+            }
+
+
         });
 
         /**
@@ -98,13 +111,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_03:
                 MNCalendarConfig build = new MNCalendarConfig.Builder()
-                        .setMnCalendar_colorWeek("#00ff00")
-                        .setMnCalendar_colorLunar("#FF0000")
-                        .setMnCalendar_colorSolar("#9BCCAF")
-                        .setMnCalendar_colorTodayBg("#00FFFF")
-                        .setMnCalendar_colorTodayText("#000000")
-                        .setMnCalendar_colorOtherMonth("#F1EDBD")
-                        .setMnCalendar_colorTitle("#FF0000")
+                        .setMnCalendar_colorWeek(Color.parseColor("#00ff00"))
+//                        .setMnCalendar_colorLunar("#FF0000")
+//                        .setMnCalendar_colorSolar("#9BCCAF")
+//                        .setMnCalendar_colorTodayBg("#00FFFF")
+//                        .setMnCalendar_colorTodayText("#000000")
+//                        .setMnCalendar_colorOtherMonth("#F1EDBD")
+//                        .setMnCalendar_colorTitle("#FF0000")
                         .setMnCalendar_showLunar(true)
                         .setMnCalendar_showWeek(true)
                         .setMnCalendar_showOtherMonthInfo(false)

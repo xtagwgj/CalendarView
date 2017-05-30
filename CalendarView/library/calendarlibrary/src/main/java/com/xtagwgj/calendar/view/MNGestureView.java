@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
  */
 
 public class MNGestureView extends LinearLayout {
+
     public MNGestureView(Context context) {
         this(context, null);
     }
@@ -39,6 +40,7 @@ public class MNGestureView extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
 
@@ -46,7 +48,6 @@ public class MNGestureView extends LinearLayout {
                 mDisplacementY = event.getRawY();
 
                 mInitialTx = getTranslationX();
-
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -69,6 +70,7 @@ public class MNGestureView extends LinearLayout {
                         setTranslationX(mInitialTx + deltaX);
                         break;
                     }
+
                 }
 
                 break;
@@ -84,6 +86,7 @@ public class MNGestureView extends LinearLayout {
                     } else if (currentTranslateX < -(mWidth / 4)) {
                         onSwipeListener.leftSwipe();
                     }
+
 
                     // comment this line if you don't want your frame layout to
                     // take its original position after releasing the touch

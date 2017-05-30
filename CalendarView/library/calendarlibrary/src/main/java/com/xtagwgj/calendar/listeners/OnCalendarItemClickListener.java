@@ -1,5 +1,6 @@
 package com.xtagwgj.calendar.listeners;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -8,8 +9,9 @@ import java.util.Date;
 
 public interface OnCalendarItemClickListener {
 
-    void onClick(Date date);
+    void onSingleChoose(Date date);
 
-    void onLongClick(Date date);
+    void onMultiChoose(ArrayList<Date> dateArrayList);
 
+    void onRangeChoose(Date startDate, Date endDate);
 }

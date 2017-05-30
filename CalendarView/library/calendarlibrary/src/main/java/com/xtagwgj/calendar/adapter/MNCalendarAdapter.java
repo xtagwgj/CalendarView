@@ -1,6 +1,7 @@
 package com.xtagwgj.calendar.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xtagwgj.calendar.R;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
@@ -20,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by maning on 2017/5/9.
+ * Created by xtagwgj on 2017/5/29.
  */
 
 public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -37,6 +39,14 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Context context;
 
+    //选择的日期
+    private ArrayList<Date> chooseDate;
+
+    //区间的开始日期
+    public Date startDate = null;
+    //区间的结束日期
+    public Date endDate = null;
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -44,13 +54,13 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.onCalendarItemClickListener = onCalendarItemClickListener;
     }
 
-    public MNCalendarAdapter(Context context, ArrayList<Date> mDatas, Calendar currentCalendar, MNCalendarConfig mnCalendarConfig) {
+    public MNCalendarAdapter(Context context, ArrayList<Date> mDatas, ArrayList<Date> chooseDate, Calendar currentCalendar, MNCalendarConfig mnCalendarConfig) {
         this.context = context;
         this.mDatas = mDatas;
         this.currentCalendar = currentCalendar;
         this.mnCalendarConfig = mnCalendarConfig;
         layoutInflater = LayoutInflater.from(this.context);
-
+        this.chooseDate = chooseDate;
     }
 
     @Override
@@ -65,15 +75,32 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             MyViewHolder myViewHolder = (MyViewHolder) holder;
 
             Date datePosition = mDatas.get(position);
+            Date currentDate = currentCalendar.getTime();
 
-            myViewHolder.iv_today_bg.setVisibility(View.GONE);
-            myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
             myViewHolder.tvDay.setText(String.valueOf(datePosition.getDate()));
-            myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorSolar());
-            myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorLunar());
+
+            //动态修改颜色
+            GradientDrawable grad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
+            grad.setColor(Color.parseColor("#FFFFFF"));
+
+            // 当前位置未被选中
+            if (!chooseDate.contains(datePosition)) {
+                myViewHolder.iv_today_bg.setVisibility(View.GONE);
+                myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorSolar());
+                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorLunar());
+
+            } else if (datePosition.getMonth() == currentDate.getMonth() || mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
+                myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
+                myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_centre);
+                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                //动态修改颜色
+                GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
+                myGrad.setColor(mnCalendarConfig.getMnCalendar_colorRangeBg());
+            }
 
             //不是本月的颜色变灰
-            Date currentDate = currentCalendar.getTime();
             if (datePosition.getMonth() != currentDate.getMonth()) {
                 myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorOtherMonth());
             }
@@ -85,8 +112,9 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             if (now_yyy_MM_dd.equals(position_yyy_MM_dd)
                     && (datePosition.getMonth() == currentDate.getMonth() ||
-                    (datePosition.getMonth() != currentDate.getMonth() && mnCalendarConfig.isMnCalendar_showOtherMonthInfo()))) {
+                    mnCalendarConfig.isMnCalendar_showOtherMonthInfo())) {
                 myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
+                myViewHolder.iv_today_bg.setBackground(context.getResources().getDrawable(R.drawable.mn_today_bg));
                 myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
                 myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
 
@@ -97,8 +125,6 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             //阴历的显示
             if (mnCalendarConfig.isMnCalendar_showLunar()) {
-
-
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(datePosition);
                 int year = cal.get(Calendar.YEAR);
@@ -112,28 +138,120 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 myViewHolder.tvDay_lunar.setVisibility(View.GONE);
             }
 
+            //非当前月信息的显示
             if (datePosition.getMonth() != currentDate.getMonth() && !mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
                 myViewHolder.tvDay_lunar.setVisibility(View.GONE);
                 myViewHolder.tvDay.setVisibility(View.GONE);
+            }
+
+            if (mnCalendarConfig.getMnCalendar_chooseType() == MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
+
+                //判断是不是点击了起始日期
+                if (startDate != null && startDate == datePosition) {
+                    myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
+                    myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_start);
+                    myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+                    myViewHolder.tvDay_lunar.setText("开始");
+                    myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                    myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                    //动态修改颜色
+                    GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
+                    myGrad.setColor(mnCalendarConfig.getMnCalendar_colorStartAndEndBg());
+                }
+
+                //判断是不是点击了结束日期
+                if (endDate != null && endDate == datePosition) {
+                    myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
+                    myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_end);
+                    myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+                    myViewHolder.tvDay_lunar.setText("结束");
+                    myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                    myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                    //动态修改颜色
+                    GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
+                    myGrad.setColor(mnCalendarConfig.getMnCalendar_colorStartAndEndBg());
+                }
+
+                //判断是不是大于起始日期
+                if (startDate != null && endDate != null) {
+                    if (datePosition.getTime() > startDate.getTime() && datePosition.getTime() < endDate.getTime()) {
+                        myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
+                        myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_centre);
+                        myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                        myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                        //动态修改颜色
+                        GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
+                        myGrad.setColor(mnCalendarConfig.getMnCalendar_colorRangeBg());
+                    }
+                }
+
+
             }
 
             if (this.onCalendarItemClickListener != null) {
                 myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Date currentDate = currentCalendar.getTime();
                         Date datePosition = mDatas.get(position);
-                        onCalendarItemClickListener.onClick(datePosition);
+
+                        //当前月或者显示其他月的信息
+                        if (currentDate.getMonth() == datePosition.getMonth() || mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
+
+                            switch (mnCalendarConfig.getMnCalendar_chooseType()) {
+                                case MNCalendarConfig.DATE_CHOOSE_TYPE_SINGLE:
+
+                                    onCalendarItemClickListener.onSingleChoose(datePosition);
+                                    break;
+
+                                case MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI:
+
+                                    if (chooseDate.contains(datePosition))
+                                        chooseDate.remove(datePosition);
+                                    else
+                                        chooseDate.add(datePosition);
+
+                                    onCalendarItemClickListener.onMultiChoose(chooseDate);
+
+                                    notifyItemChanged(position);
+                                    break;
+
+                                case MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE:
+
+                                    //必须大于今天
+                                    if (datePosition.getTime() < datePosition.getTime()) {
+                                        Toast.makeText(context, "选择的日期必须大于今天", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                    if (startDate != null && endDate != null) {
+                                        startDate = null;
+                                        endDate = null;
+                                    }
+                                    if (startDate == null) {
+                                        startDate = datePosition;
+                                    } else {
+                                        //判断结束位置是不是大于开始位置
+                                        long dateClickTime = datePosition.getTime();
+                                        long dateStartTime = startDate.getTime();
+                                        if (dateClickTime <= dateStartTime) {
+                                            startDate = datePosition;
+                                        } else {
+                                            endDate = datePosition;
+
+                                            onCalendarItemClickListener.onRangeChoose(startDate, endDate);
+                                        }
+                                    }
+
+                                    //刷新
+                                    notifyDataSetChanged();
+                                    break;
+                            }
+
+                        }
                     }
                 });
 
-                myViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        Date datePosition = mDatas.get(position);
-                        onCalendarItemClickListener.onLongClick(datePosition);
-                        return true;
-                    }
-                });
             }
 
         }

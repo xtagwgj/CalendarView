@@ -23,7 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by maning on 2017/5/9.
+ * Created by xtagwgj on 2017/5/29.
  */
 
 public class MNCalendar extends LinearLayout implements View.OnClickListener {
@@ -67,6 +67,8 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     //当前的日期
     private Calendar currentCalendar = Calendar.getInstance();
     private MNCalendarAdapter mnCalendarAdapter;
+
+    private ArrayList<Date> chooseDateList;
 
     public MNCalendar(Context context) {
         this(context, null);
@@ -134,6 +136,11 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         btn_left.setOnClickListener(this);
         btn_right.setOnClickListener(this);
 
+        if (chooseDateList == null)
+            chooseDateList = new ArrayList<>();
+        else
+            chooseDateList.clear();
+
     }
 
     private void drawCalendar() {
@@ -199,7 +206,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         }
 
         //设置Adapter
-        mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, currentCalendar, mnCalendarConfig);
+        mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, chooseDateList, currentCalendar, mnCalendarConfig);
         recyclerViewCalendar.setAdapter(mnCalendarAdapter);
 
         //设置Item点击事件

@@ -1,45 +1,98 @@
 package com.xtagwgj.calendar.model;
 
 import android.graphics.Color;
+import android.support.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by maning on 2017/5/10.
+ * Created by xtagwgj on 2017/5/29.
  */
 
 public class MNCalendarConfig {
-    /*
-    <!--日历是否显示阴历 : true-显示,false-不显示 (默认显示)-->
-    <attr name="mnCalendar_showLunar" format="boolean" />
-    <!--日历是否显示星期一栏 : true-显示,false-不显示 (默认显示) -->
-    <attr name="mnCalendar_showWeek" format="boolean" />
-    <!--日历星期的颜色值-->
-    <attr name="mnCalendar_colorWeek" format="color" />
-    <!--日历Item的阳历的颜色值-->
-    <attr name="mnCalendar_colorSolar" format="color" />
-    <!--日历Item的阴历的颜色值-->
-    <attr name="mnCalendar_colorLunar" format="color" />
-    <!--日历今天圆形背景-->
-    <attr name="mnCalendar_colorTodayBg" format="color" />
-    <!--日历不是当前月份的阳历的颜色-->
-    <attr name="mnCalendar_colorOtherMonth" format="color" />
-    <!--日历今天圆形背景上的文字的颜色-->
-    <attr name="mnCalendar_colorTodayText" format="color" />
-    */
 
+    //翻页的方式
+    public static final int SWIPE_MODE_HOR = 0;
+    public static final int SWIPE_MODE_VER = 1;
+
+    //只选择一个日期
+    public static final int DATE_CHOOSE_TYPE_SINGLE = 0;
+    //多个日期，点一次选一次
+    public static final int DATE_CHOOSE_TYPE_MULTI = 1;
+    //时间段选择
+    public static final int DATE_CHOOSE_TYPE_RANGE = 2;
+
+    //日历是否显示阴历 : true-显示,false-不显示 (默认显示)
     private boolean mnCalendar_showLunar = true;
+    //日历是否显示星期一栏 : true-显示,false-不显示 (默认显示)
     private boolean mnCalendar_showWeek = true;
+    //是否显示标题
     private boolean mnCalendar_showTitle = true;
+    //是否显示其他月份的信息
     private boolean mnCalendar_showOtherMonthInfo = true;
+    //日历星期的颜色值
     private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
+    //日历Item的阳历的颜色值
     private int mnCalendar_colorSolar = Color.parseColor("#282828");
+    //日历Item的阴历的颜色值
     private int mnCalendar_colorLunar = Color.parseColor("#979797");
+    //日历今天圆形背景
     private int mnCalendar_colorTodayBg = Color.parseColor("#282828");
+    //日历不是当前月份的阳历的颜色
     private int mnCalendar_colorOtherMonth = Color.parseColor("#979797");
+    //日历今天圆形背景上的文字的颜色
     private int mnCalendar_colorTodayText = Color.parseColor("#FFFFFF");
+    //标题字体的颜色
     private int mnCalendar_colorTitle = Color.parseColor("#282828");
-
+    //开始结束的背景颜色
+    private int mnCalendar_colorStartAndEndBg = Color.parseColor("#df0e0e0e");
+    //区间中间的背景颜色
+    private int mnCalendar_colorRangeBg = Color.parseColor("#df0e0e0e");
+    //选择区间文字的颜色
+    private int mnCalendar_colorRangeText = Color.parseColor("#FFFFFF");
+    //滑动的方式
+    private int mnCalendar_swipeMode = SWIPE_MODE_HOR;
+    //日期的选择方式
+    private int mnCalendar_chooseType = DATE_CHOOSE_TYPE_SINGLE;
 
     private MNCalendarConfig() {
+    }
+
+    @IntDef({SWIPE_MODE_HOR, SWIPE_MODE_VER})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface SwipeType {
+
+    }
+
+    @IntDef({DATE_CHOOSE_TYPE_SINGLE, DATE_CHOOSE_TYPE_MULTI, DATE_CHOOSE_TYPE_RANGE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ChooseType {
+
+    }
+
+    public boolean isMnCalendar_showLunar() {
+        return mnCalendar_showLunar;
+    }
+
+    public void setMnCalendar_showLunar(boolean mnCalendar_showLunar) {
+        this.mnCalendar_showLunar = mnCalendar_showLunar;
+    }
+
+    public boolean isMnCalendar_showWeek() {
+        return mnCalendar_showWeek;
+    }
+
+    public void setMnCalendar_showWeek(boolean mnCalendar_showWeek) {
+        this.mnCalendar_showWeek = mnCalendar_showWeek;
+    }
+
+    public boolean isMnCalendar_showTitle() {
+        return mnCalendar_showTitle;
+    }
+
+    public void setMnCalendar_showTitle(boolean mnCalendar_showTitle) {
+        this.mnCalendar_showTitle = mnCalendar_showTitle;
     }
 
     public boolean isMnCalendar_showOtherMonthInfo() {
@@ -50,35 +103,11 @@ public class MNCalendarConfig {
         this.mnCalendar_showOtherMonthInfo = mnCalendar_showOtherMonthInfo;
     }
 
-    public boolean isMnCalendar_showTitle() {
-        return mnCalendar_showTitle;
-    }
-
-    private void setMnCalendar_showTitle(boolean mnCalendar_showTitle) {
-        this.mnCalendar_showTitle = mnCalendar_showTitle;
-    }
-
-    public boolean isMnCalendar_showLunar() {
-        return mnCalendar_showLunar;
-    }
-
-    private void setMnCalendar_showLunar(boolean mnCalendar_showLunar) {
-        this.mnCalendar_showLunar = mnCalendar_showLunar;
-    }
-
-    public boolean isMnCalendar_showWeek() {
-        return mnCalendar_showWeek;
-    }
-
-    private void setMnCalendar_showWeek(boolean mnCalendar_showWeek) {
-        this.mnCalendar_showWeek = mnCalendar_showWeek;
-    }
-
     public int getMnCalendar_colorWeek() {
         return mnCalendar_colorWeek;
     }
 
-    private void setMnCalendar_colorWeek(int mnCalendar_colorWeek) {
+    public void setMnCalendar_colorWeek(int mnCalendar_colorWeek) {
         this.mnCalendar_colorWeek = mnCalendar_colorWeek;
     }
 
@@ -86,7 +115,7 @@ public class MNCalendarConfig {
         return mnCalendar_colorSolar;
     }
 
-    private void setMnCalendar_colorSolar(int mnCalendar_colorSolar) {
+    public void setMnCalendar_colorSolar(int mnCalendar_colorSolar) {
         this.mnCalendar_colorSolar = mnCalendar_colorSolar;
     }
 
@@ -94,7 +123,7 @@ public class MNCalendarConfig {
         return mnCalendar_colorLunar;
     }
 
-    private void setMnCalendar_colorLunar(int mnCalendar_colorLunar) {
+    public void setMnCalendar_colorLunar(int mnCalendar_colorLunar) {
         this.mnCalendar_colorLunar = mnCalendar_colorLunar;
     }
 
@@ -102,7 +131,7 @@ public class MNCalendarConfig {
         return mnCalendar_colorTodayBg;
     }
 
-    private void setMnCalendar_colorTodayBg(int mnCalendar_colorTodayBg) {
+    public void setMnCalendar_colorTodayBg(int mnCalendar_colorTodayBg) {
         this.mnCalendar_colorTodayBg = mnCalendar_colorTodayBg;
     }
 
@@ -110,7 +139,7 @@ public class MNCalendarConfig {
         return mnCalendar_colorOtherMonth;
     }
 
-    private void setMnCalendar_colorOtherMonth(int mnCalendar_colorOtherMonth) {
+    public void setMnCalendar_colorOtherMonth(int mnCalendar_colorOtherMonth) {
         this.mnCalendar_colorOtherMonth = mnCalendar_colorOtherMonth;
     }
 
@@ -118,7 +147,7 @@ public class MNCalendarConfig {
         return mnCalendar_colorTodayText;
     }
 
-    private void setMnCalendar_colorTodayText(int mnCalendar_colorTodayText) {
+    public void setMnCalendar_colorTodayText(int mnCalendar_colorTodayText) {
         this.mnCalendar_colorTodayText = mnCalendar_colorTodayText;
     }
 
@@ -126,17 +155,57 @@ public class MNCalendarConfig {
         return mnCalendar_colorTitle;
     }
 
-    private void setMnCalendar_colorTitle(int mnCalendar_colorTitle) {
+    public void setMnCalendar_colorTitle(int mnCalendar_colorTitle) {
         this.mnCalendar_colorTitle = mnCalendar_colorTitle;
+    }
+
+    public int getMnCalendar_colorRangeBg() {
+        return mnCalendar_colorRangeBg;
+    }
+
+    public void setMnCalendar_colorRangeBg(int mnCalendar_colorRangeBg) {
+        this.mnCalendar_colorRangeBg = mnCalendar_colorRangeBg;
+    }
+
+    public int getMnCalendar_colorRangeText() {
+        return mnCalendar_colorRangeText;
+    }
+
+    public void setMnCalendar_colorRangeText(int mnCalendar_colorRangeText) {
+        this.mnCalendar_colorRangeText = mnCalendar_colorRangeText;
+    }
+
+    public int getMnCalendar_swipeMode() {
+        return mnCalendar_swipeMode;
+    }
+
+    public void setMnCalendar_swipeMode(int mnCalendar_swipeMode) {
+        this.mnCalendar_swipeMode = mnCalendar_swipeMode;
+    }
+
+    public int getMnCalendar_chooseType() {
+        return mnCalendar_chooseType;
+    }
+
+    public void setMnCalendar_chooseType(@ChooseType int mnCalendar_chooseType) {
+        this.mnCalendar_chooseType = mnCalendar_chooseType;
+    }
+
+    public int getMnCalendar_colorStartAndEndBg() {
+        return mnCalendar_colorStartAndEndBg;
+    }
+
+    public void setMnCalendar_colorStartAndEndBg(int mnCalendar_colorStartAndEndBg) {
+        this.mnCalendar_colorStartAndEndBg = mnCalendar_colorStartAndEndBg;
     }
 
     @Override
     public String toString() {
         return "MNCalendarConfig{" +
-                "mnCalendar_showOtherMonthInfo=" + mnCalendar_showOtherMonthInfo +
                 "mnCalendar_showLunar=" + mnCalendar_showLunar +
                 ", mnCalendar_showWeek=" + mnCalendar_showWeek +
                 ", mnCalendar_showTitle=" + mnCalendar_showTitle +
+                ", mnCalendar_showOtherMonthInfo=" + mnCalendar_showOtherMonthInfo +
                 ", mnCalendar_colorWeek=" + mnCalendar_colorWeek +
                 ", mnCalendar_colorSolar=" + mnCalendar_colorSolar +
                 ", mnCalendar_colorLunar=" + mnCalendar_colorLunar +
@@ -144,6 +213,10 @@ public class MNCalendarConfig {
                 ", mnCalendar_colorOtherMonth=" + mnCalendar_colorOtherMonth +
                 ", mnCalendar_colorTodayText=" + mnCalendar_colorTodayText +
                 ", mnCalendar_colorTitle=" + mnCalendar_colorTitle +
+                ", mnCalendar_colorRangeBg=" + mnCalendar_colorRangeBg +
+                ", mnCalendar_colorRangeText=" + mnCalendar_colorRangeText +
+                ", mnCalendar_swipeMode=" + mnCalendar_swipeMode +
+                ", mnCalendar_chooseType=" + mnCalendar_chooseType +
                 '}';
     }
 
@@ -156,6 +229,16 @@ public class MNCalendarConfig {
 
         public Builder setMnCalendar_showOtherMonthInfo(boolean mnCalendar_showOtherMonthInfo) {
             this.mnCalendarConfig.setMnCalendar_showOtherMonthInfo(mnCalendar_showOtherMonthInfo);
+            return this;
+        }
+
+        public Builder setMnCalendar_swipeMode(@SwipeType int swipeMode) {
+            this.mnCalendarConfig.setMnCalendar_swipeMode(swipeMode);
+            return this;
+        }
+
+        public Builder setMnCalendar_chooseType(@ChooseType int mnCalendar_chooseType) {
+            this.mnCalendarConfig.setMnCalendar_chooseType(mnCalendar_chooseType);
             return this;
         }
 
@@ -176,44 +259,61 @@ public class MNCalendarConfig {
         }
 
 
-        public Builder setMnCalendar_colorWeek(String mnCalendar_colorWeek) {
-            this.mnCalendarConfig.setMnCalendar_colorWeek(Color.parseColor(mnCalendar_colorWeek));
+        public Builder setMnCalendar_colorWeek(int mnCalendar_colorWeek) {
+            this.mnCalendarConfig.setMnCalendar_colorWeek(mnCalendar_colorWeek);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorSolar(String mnCalendar_colorSolar) {
-            this.mnCalendarConfig.setMnCalendar_colorSolar(Color.parseColor(mnCalendar_colorSolar));
+        public Builder setMnCalendar_colorSolar(int mnCalendar_colorSolar) {
+            this.mnCalendarConfig.setMnCalendar_colorSolar(mnCalendar_colorSolar);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorLunar(String mnCalendar_colorLunar) {
-            this.mnCalendarConfig.setMnCalendar_colorLunar(Color.parseColor(mnCalendar_colorLunar));
+        public Builder setMnCalendar_colorLunar(int mnCalendar_colorLunar) {
+            this.mnCalendarConfig.setMnCalendar_colorLunar(mnCalendar_colorLunar);
             return this;
         }
 
-        public Builder setMnCalendar_colorTodayBg(String mnCalendar_colorTodayBg) {
-            this.mnCalendarConfig.setMnCalendar_colorTodayBg(Color.parseColor(mnCalendar_colorTodayBg));
-            return this;
-        }
-
-
-        public Builder setMnCalendar_colorOtherMonth(String mnCalendar_colorOtherMonth) {
-            this.mnCalendarConfig.setMnCalendar_colorOtherMonth(Color.parseColor(mnCalendar_colorOtherMonth));
+        public Builder setMnCalendar_colorTodayBg(int mnCalendar_colorTodayBg) {
+            this.mnCalendarConfig.setMnCalendar_colorTodayBg(mnCalendar_colorTodayBg);
             return this;
         }
 
 
-        public Builder setMnCalendar_colorTodayText(String mnCalendar_colorTodayText) {
-            this.mnCalendarConfig.setMnCalendar_colorTodayText(Color.parseColor(mnCalendar_colorTodayText));
+        public Builder setMnCalendar_colorOtherMonth(int mnCalendar_colorOtherMonth) {
+            this.mnCalendarConfig.setMnCalendar_colorOtherMonth(mnCalendar_colorOtherMonth);
             return this;
         }
 
-        public Builder setMnCalendar_colorTitle(String mnCalendar_colorTitle) {
-            this.mnCalendarConfig.setMnCalendar_colorTitle(Color.parseColor(mnCalendar_colorTitle));
+
+        public Builder setMnCalendar_colorTodayText(int mnCalendar_colorTodayText) {
+            this.mnCalendarConfig.setMnCalendar_colorTodayText(mnCalendar_colorTodayText);
             return this;
         }
+
+        public Builder setMnCalendar_colorTitle(int mnCalendar_colorTitle) {
+            this.mnCalendarConfig.setMnCalendar_colorTitle(mnCalendar_colorTitle);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorRangeBg(int mnCalendar_colorRangeBg) {
+            this.mnCalendarConfig.setMnCalendar_colorRangeBg(mnCalendar_colorRangeBg);
+            return this;
+        }
+
+
+        public Builder setMnCalendar_colorRangeText(int mnCalendar_colorRangeText) {
+            this.mnCalendarConfig.setMnCalendar_colorRangeText(mnCalendar_colorRangeText);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorStartAndEndBg(int mnCalendar_colorStartAndEndBg) {
+            mnCalendarConfig.setMnCalendar_colorStartAndEndBg(mnCalendar_colorStartAndEndBg);
+            return this;
+        }
+
 
         public MNCalendarConfig build() {
             return mnCalendarConfig;
