@@ -31,6 +31,8 @@ public class MNCalendarConfig {
     private boolean mnCalendar_showTitle = true;
     //是否显示其他月份的信息
     private boolean mnCalendar_showOtherMonthInfo = true;
+    //是否显示今天
+    private boolean mnCalendar_showCurrDay = true;
     //日历星期的颜色值
     private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
     //日历Item的阳历的颜色值
@@ -56,6 +58,7 @@ public class MNCalendarConfig {
     //日期的选择方式
     private int mnCalendar_chooseType = DATE_CHOOSE_TYPE_SINGLE;
 
+
     private MNCalendarConfig() {
     }
 
@@ -69,6 +72,14 @@ public class MNCalendarConfig {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ChooseType {
 
+    }
+
+    public boolean isMnCalendar_showCurrDay() {
+        return mnCalendar_showCurrDay;
+    }
+
+    public void setMnCalendar_showCurrDay(boolean mnCalendar_showCurrDay) {
+        this.mnCalendar_showCurrDay = mnCalendar_showCurrDay;
     }
 
     public boolean isMnCalendar_showLunar() {
@@ -311,6 +322,11 @@ public class MNCalendarConfig {
 
         public Builder setMnCalendar_colorStartAndEndBg(int mnCalendar_colorStartAndEndBg) {
             mnCalendarConfig.setMnCalendar_colorStartAndEndBg(mnCalendar_colorStartAndEndBg);
+            return this;
+        }
+
+        public Builder setMnCalendar_showCurrDay(boolean mnCalendar_showCurrDay) {
+            mnCalendarConfig.setMnCalendar_showCurrDay(mnCalendar_showCurrDay);
             return this;
         }
 

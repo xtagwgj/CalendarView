@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    android:background="@drawable/mn_calendar_item_selector">
 
-    <RelativeLayout
 
+    <ImageView
+        android:id="@+id/iv_today_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/mn_calendar_item_selector">
+        android:layout_centerInParent="true"
+        android:layout_margin="2dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/mn_today_bg" />
 
-        <ImageView
-            android:id="@+id/iv_today_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_margin="2dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/mn_today_bg" />
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,6 +39,12 @@
             android:textSize="10sp"
             android:visibility="visible" />
 
+        <ImageView
+            android:layout_marginTop="4dp"
+            android:id="@+id/currDayImageView"
+            android:src="@drawable/circle_today_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

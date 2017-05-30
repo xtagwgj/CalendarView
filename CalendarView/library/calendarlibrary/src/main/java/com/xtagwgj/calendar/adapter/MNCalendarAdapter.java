@@ -110,17 +110,21 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             String now_yyy_MM_dd = sdf.format(nowDate);
             String position_yyy_MM_dd = sdf.format(datePosition);
 
-            if (now_yyy_MM_dd.equals(position_yyy_MM_dd)
+            if (mnCalendarConfig.isMnCalendar_showCurrDay() && now_yyy_MM_dd.equals(position_yyy_MM_dd)
                     && (datePosition.getMonth() == currentDate.getMonth() ||
                     mnCalendarConfig.isMnCalendar_showOtherMonthInfo())) {
-                myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
-                myViewHolder.iv_today_bg.setBackground(context.getResources().getDrawable(R.drawable.mn_today_bg));
-                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
-                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
-
+//                myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
+//                myViewHolder.iv_today_bg.setBackground(context.getResources().getDrawable(R.drawable.mn_today_bg));
+//                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
+//                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorTodayText());
                 //动态修改颜色
-                GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
-                myGrad.setColor(mnCalendarConfig.getMnCalendar_colorTodayBg());
+//                GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
+//                myGrad.setColor(mnCalendarConfig.getMnCalendar_colorTodayBg());
+
+                myViewHolder.currDayImageView.setVisibility(View.VISIBLE);
+
+            } else {
+                myViewHolder.currDayImageView.setVisibility(View.INVISIBLE);
             }
 
             //阴历的显示
@@ -133,7 +137,17 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 LunarCalendarUtils.Lunar solarToLunar = LunarCalendarUtils.solarToLunar(new LunarCalendarUtils.Solar(year, month, day));
                 String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar.lunarDay);
                 myViewHolder.tvDay_lunar.setText(lunarDayString);
-                myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+
+
+                if (now_yyy_MM_dd.equals(position_yyy_MM_dd)) {
+                    myViewHolder.currDayImageView.setVisibility(View.VISIBLE);
+                    myViewHolder.tvDay_lunar.setVisibility(View.GONE);
+                } else {
+                    myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+                    myViewHolder.currDayImageView.setVisibility(View.GONE);
+                }
+
+
             } else {
                 myViewHolder.tvDay_lunar.setVisibility(View.GONE);
             }
@@ -268,12 +282,14 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private TextView tvDay;
         private TextView tvDay_lunar;
         private ImageView iv_today_bg;
+        private ImageView currDayImageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tvDay = (TextView) itemView.findViewById(R.id.tvDay);
             tvDay_lunar = (TextView) itemView.findViewById(R.id.tvDay_lunar);
             iv_today_bg = (ImageView) itemView.findViewById(R.id.iv_today_bg);
+            currDayImageView = (ImageView) itemView.findViewById(R.id.currDayImageView);
         }
     }
 
