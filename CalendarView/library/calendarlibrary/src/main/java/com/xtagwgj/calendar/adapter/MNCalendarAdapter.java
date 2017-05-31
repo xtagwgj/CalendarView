@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 日历的适配器
@@ -51,14 +52,20 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     //区间的结束日期
     public Date endDate = null;
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
 
     public void setOnCalendarItemClickListener(OnCalendarItemClickListener onCalendarItemClickListener) {
         this.onCalendarItemClickListener = onCalendarItemClickListener;
     }
 
+    public void refreshChooseDate(ArrayList<Date> chooseDate) {
+        this.chooseDate = chooseDate;
+        notifyDataSetChanged();
+    }
+
     public MNCalendarAdapter(Context context, ArrayList<Date> mDatas, ArrayList<Date> chooseDate, Calendar currentShowCalendar, MNCalendarConfig mnCalendarConfig) {
+
         Date nowDate = new Date();
         String now_yyy_MM_dd = sdf.format(nowDate);
         try {

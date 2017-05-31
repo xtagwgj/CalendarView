@@ -16,6 +16,7 @@ import com.xtagwgj.calendar.model.MNCalendarConfig;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
                 .setMnCalendar_showWeek(true)
                 .setMnCalendar_showOtherMonthInfo(false)
                 .setMnCalendar_showTitle(true)
-                .setMnCalendar_colorTitle(Color.parseColor("#FFFFFF"))
-                .setMnCalendar_colorBgTitle(Color.parseColor("#1D1F26"))
-                .setMnCalendar_colorBgWeekend(Color.parseColor("#1D1F26"))
-                .setMnCalendar_colorWeek(Color.parseColor("#8B8C8D"))
-                .setMnCalendar_colorBgCalendar(Color.parseColor("#1D1F26"))
-                .setMnCalendar_colorBeforeToday(Color.parseColor("#8B8C8D"))
-                .setMnCalendar_colorStartAndEndBg(Color.parseColor("#0F445C"))
-                .setMnCalendar_colorRangeBg(Color.parseColor("#0F445C"))
-                .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
-                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
+//                .setMnCalendar_colorTitle(Color.parseColor("#FFFFFF"))
+//                .setMnCalendar_colorBgTitle(Color.parseColor("#1D1F26"))
+//                .setMnCalendar_colorBgWeekend(Color.parseColor("#1D1F26"))
+//                .setMnCalendar_colorWeek(Color.parseColor("#8B8C8D"))
+//                .setMnCalendar_colorBgCalendar(Color.parseColor("#1D1F26"))
+//                .setMnCalendar_colorBeforeToday(Color.parseColor("#8B8C8D"))
+//                .setMnCalendar_colorStartAndEndBg(Color.parseColor("#0F445C"))
+//                .setMnCalendar_colorRangeBg(Color.parseColor("#0F445C"))
+//                .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
+                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_NONE)
                 .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
                 .setMnCalendar_canSelectDayBeforeNow(true)
                 .build();
@@ -53,7 +54,14 @@ public class MainActivity extends AppCompatActivity {
         mnCalendar = (MNCalendar) findViewById(R.id.mnCalendar);
 
 
+
+
         mnCalendar.setConfig(build);
+
+        ArrayList<Date> dates = new ArrayList<>();
+        dates.add(Calendar.getInstance().getTime());
+        mnCalendar.setChooseDateList(dates);
+
 
         /**
          * Item点击监听

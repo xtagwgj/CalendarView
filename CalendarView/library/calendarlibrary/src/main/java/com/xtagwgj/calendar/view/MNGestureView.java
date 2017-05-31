@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 
 public class MNGestureView extends LinearLayout {
 
+    private boolean canSwap = true;
+
     public MNGestureView(Context context) {
         this(context, null);
     }
@@ -40,6 +42,9 @@ public class MNGestureView extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+
+        if (!canSwap)
+            return false;
 
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
@@ -101,6 +106,9 @@ public class MNGestureView extends LinearLayout {
         return false;
     }
 
+    public void setCanSwipe(boolean canSwap) {
+        this.canSwap = canSwap;
+    }
 
     public interface OnSwipeListener {
         void rightSwipe();

@@ -14,8 +14,9 @@ import java.lang.annotation.RetentionPolicy;
 public class MNCalendarConfig {
 
     //翻页的方式
-    public static final int SWIPE_MODE_HOR = 0;
-    public static final int SWIPE_MODE_VER = 1;
+    public static final int SWIPE_MODE_NONE = 0;
+    public static final int SWIPE_MODE_HOR = 1;
+    public static final int SWIPE_MODE_VER = 2;
 
     //只选择一个日期
     public static final int DATE_CHOOSE_TYPE_SINGLE = 0;
@@ -75,7 +76,7 @@ public class MNCalendarConfig {
     private MNCalendarConfig() {
     }
 
-    @IntDef({SWIPE_MODE_HOR, SWIPE_MODE_VER})
+    @IntDef({SWIPE_MODE_NONE, SWIPE_MODE_HOR, SWIPE_MODE_VER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface SwipeType {
 
@@ -271,6 +272,7 @@ public class MNCalendarConfig {
     public void setMnCalendar_canSelectDayBeforeNow(boolean mnCalendar_canSelectDayBeforeNow) {
         this.mnCalendar_canSelectDayBeforeNow = mnCalendar_canSelectDayBeforeNow;
     }
+
 
     @Override
     public String toString() {

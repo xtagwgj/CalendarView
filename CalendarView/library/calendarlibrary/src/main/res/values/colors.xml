@@ -40,4 +40,7 @@
     <color name="color_transparent">#00000000</color>
     <color name="color_half_transparent">#1A000000</color>
 
+    <color name="color_title">#282828</color>
+    <color name="color_selected">#df0e0e0e</color>
+
 </resources>

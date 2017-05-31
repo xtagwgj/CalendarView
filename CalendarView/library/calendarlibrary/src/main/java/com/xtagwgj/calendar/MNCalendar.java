@@ -17,6 +17,7 @@ import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
 import com.xtagwgj.calendar.model.MNCalendarConfig;
 import com.xtagwgj.calendar.view.MNGestureView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +39,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
 
     private RecyclerView recyclerViewCalendar;
 
-//    private MNGestureView mnGestureView;
+    private MNGestureView mnGestureView;
 
     //日期
     private LinearLayout ll_week;
@@ -99,7 +100,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         //绑定View
         View.inflate(context, R.layout.mn_layout_calendar, this);
         recyclerViewCalendar = (RecyclerView) findViewById(R.id.recyclerViewCalendar);
-        MNGestureView mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
+        mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
         ll_week = (LinearLayout) findViewById(R.id.ll_week);
         tv_week_01 = (TextView) findViewById(R.id.tv_week_01);
         tv_week_02 = (TextView) findViewById(R.id.tv_week_02);
@@ -129,6 +130,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
                 setNextMonth();
             }
         });
+
 
         //点击事件
         btn_left.setOnClickListener(this);
@@ -197,6 +199,12 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
 
         //移动到需要绘制的第一天
         calendar.add(Calendar.DAY_OF_MONTH, -day_of_week);
+
+        //将时间移到0点
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
 
         float weeks = (maxDays + day_of_week) / 7f;
 
@@ -299,8 +307,29 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     public void setConfig(MNCalendarConfig config) {
         this.mnCalendarConfig = config;
 
+        if (mnGestureView != null)
+            mnGestureView.setCanSwipe(config.getMnCalendar_swipeMode() != MNCalendarConfig.SWIPE_MODE_NONE);
 
         drawCalendar();
+    }
+
+    public void setChooseDateList(ArrayList<Date> chooseDate) {
+        this.chooseDateList = chooseDate == null ? new ArrayList<Date>() : chooseDate;
+
+        if (chooseDateList.size() > 0) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            for (int i = 0; i < chooseDateList.size(); i++) {
+                Date nowDate = chooseDateList.get(i);
+                String now_yyy_MM_dd = sdf.format(nowDate);
+                try {
+                    nowDate = sdf.parse(now_yyy_MM_dd);
+                } catch (ParseException e) {
+                }
+
+                chooseDateList.set(i, nowDate);
+            }
+        }
+        mnCalendarAdapter.refreshChooseDate(chooseDateList);
     }
 
     @Override
