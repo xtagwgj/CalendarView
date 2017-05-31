@@ -38,7 +38,6 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private Context context;
 
     private RecyclerView recyclerViewCalendar;
-
     private MNGestureView mnGestureView;
 
     //日期
@@ -58,7 +57,6 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private TextView tv_calendar_title;
 
     private OnCalendarItemClickListener onCalendarItemClickListener;
-
     private OnCalendarChangeListener onCalendarChangeListener;
 
     //配置信息
@@ -68,7 +66,13 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private Calendar currentCalendar = Calendar.getInstance();
     private MNCalendarAdapter mnCalendarAdapter;
 
+    //选中的日期
     private ArrayList<Date> chooseDateList;
+
+    //区间的开始日期
+    private Date startDate = null;
+    //区间的结束日期
+    private Date endDate = null;
 
     public XCalendar(Context context) {
         this(context, null);
@@ -192,6 +196,12 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         //至于当月的第一天
         calendar.set(Calendar.DAY_OF_MONTH, 1);
 
+        //将时间移到0点
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
         //获取当月第一天是星期几
         int day_of_week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
@@ -199,12 +209,6 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
 
         //移动到需要绘制的第一天
         calendar.add(Calendar.DAY_OF_MONTH, -day_of_week);
-
-        //将时间移到0点
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
 
         float weeks = (maxDays + day_of_week) / 7f;
 
@@ -217,7 +221,18 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         }
 
         //设置Adapter
-        mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, chooseDateList, currentCalendar, mnCalendarConfig);
+        if (mnCalendarAdapter == null) {
+            mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, chooseDateList, currentCalendar,
+                    mnCalendarConfig, startDate, endDate);
+        } else {
+            startDate = mnCalendarAdapter.getStartRangeDate();
+            endDate = mnCalendarAdapter.getEndRangeDate();
+
+            mnCalendarAdapter.refreshAll(mDatas, chooseDateList, currentCalendar,
+                    mnCalendarConfig, startDate, endDate);
+        }
+
+
         recyclerViewCalendar.setAdapter(mnCalendarAdapter);
         recyclerViewCalendar.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgCalendar());
 

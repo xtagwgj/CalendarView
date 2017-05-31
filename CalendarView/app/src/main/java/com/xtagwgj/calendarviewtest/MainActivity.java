@@ -18,12 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private Context context;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-    private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private XCalendar mnCalendar;
 
     @Override
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMnCalendar_showLunar(false)
                 .setMnCalendar_showWeek(true)
                 .setMnCalendar_showOtherMonthInfo(false)
-                .setMnCalendar_showTitle(false)
+                .setMnCalendar_showTitle(true)
                 .setMnCalendar_colorBgWeekend(Color.parseColor("#191A1F"))
                 .setMnCalendar_colorWeek(Color.parseColor("#CCCCCC"))
                 .setMnCalendar_colorBgCalendar(Color.parseColor("#1E1F25"))
@@ -46,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
                 .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
                 .setMnCalendar_colorSplit(Color.parseColor("#222427"))
                 .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_HOR)
-                .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
+                .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE)
                 .setMnCalendar_canSelectDayBeforeNow(false)
                 .build();
 
         mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
-
-
 
 
         mnCalendar.setConfig(build);
