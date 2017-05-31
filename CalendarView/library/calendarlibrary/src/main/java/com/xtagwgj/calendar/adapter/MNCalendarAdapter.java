@@ -165,7 +165,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 int month = cal.get(Calendar.MONTH) + 1;
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 LunarCalendarUtils.Lunar solarToLunar = LunarCalendarUtils.solarToLunar(new LunarCalendarUtils.Solar(year, month, day));
-//                String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar.lunarDay);
+                //String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar.lunarDay);
                 String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar);
                 myViewHolder.tvDay_lunar.setText(lunarDayString);
 
