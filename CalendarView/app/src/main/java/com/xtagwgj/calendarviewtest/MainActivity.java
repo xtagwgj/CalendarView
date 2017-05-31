@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.xtagwgj.calendar.MNCalendar;
+import com.xtagwgj.calendar.XCalendar;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
 import com.xtagwgj.calendar.model.MNCalendarConfig;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
     private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-    private MNCalendar mnCalendar;
+    private XCalendar mnCalendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +33,24 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         MNCalendarConfig build = new MNCalendarConfig.Builder()
-                .setMnCalendar_showLunar(true)
+                .setMnCalendar_showLunar(false)
                 .setMnCalendar_showWeek(true)
                 .setMnCalendar_showOtherMonthInfo(false)
-                .setMnCalendar_showTitle(true)
-//                .setMnCalendar_colorTitle(Color.parseColor("#FFFFFF"))
-//                .setMnCalendar_colorBgTitle(Color.parseColor("#1D1F26"))
-//                .setMnCalendar_colorBgWeekend(Color.parseColor("#1D1F26"))
-//                .setMnCalendar_colorWeek(Color.parseColor("#8B8C8D"))
-//                .setMnCalendar_colorBgCalendar(Color.parseColor("#1D1F26"))
-//                .setMnCalendar_colorBeforeToday(Color.parseColor("#8B8C8D"))
-//                .setMnCalendar_colorStartAndEndBg(Color.parseColor("#0F445C"))
-//                .setMnCalendar_colorRangeBg(Color.parseColor("#0F445C"))
-//                .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
-                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_NONE)
+                .setMnCalendar_showTitle(false)
+                .setMnCalendar_colorBgWeekend(Color.parseColor("#191A1F"))
+                .setMnCalendar_colorWeek(Color.parseColor("#CCCCCC"))
+                .setMnCalendar_colorBgCalendar(Color.parseColor("#1E1F25"))
+                .setMnCalendar_colorBeforeToday(Color.parseColor("#CCCCCC"))
+                .setMnCalendar_colorStartAndEndBg(Color.parseColor("#174254"))
+                .setMnCalendar_colorRangeBg(Color.parseColor("#174254"))
+                .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
+                .setMnCalendar_colorSplit(Color.parseColor("#222427"))
+                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_HOR)
                 .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
-                .setMnCalendar_canSelectDayBeforeNow(true)
+                .setMnCalendar_canSelectDayBeforeNow(false)
                 .build();
 
-        mnCalendar = (MNCalendar) findViewById(R.id.mnCalendar);
+        mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
 
 
 

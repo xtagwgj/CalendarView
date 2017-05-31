@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#191A1F"
     tools:context="com.xtagwgj.calendarviewtest.MainActivity">
 
-    <com.xtagwgj.calendar.MNCalendar
+    <com.xtagwgj.calendar.XCalendar
         android:id="@+id/mnCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

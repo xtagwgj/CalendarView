@@ -29,9 +29,9 @@ import java.util.Locale;
  * Created by xtagwgj on 2017/5/29.
  */
 
-public class MNCalendar extends LinearLayout implements View.OnClickListener {
+public class XCalendar extends LinearLayout implements View.OnClickListener {
 
-    private static final String TAG = "MNCalendar";
+    private static final String TAG = "XCalendar";
 
     private static SimpleDateFormat sdf_yyyy_MM = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
 
@@ -70,15 +70,15 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
 
     private ArrayList<Date> chooseDateList;
 
-    public MNCalendar(Context context) {
+    public XCalendar(Context context) {
         this(context, null);
     }
 
-    public MNCalendar(Context context, AttributeSet attrs) {
+    public XCalendar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MNCalendar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XCalendar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
 

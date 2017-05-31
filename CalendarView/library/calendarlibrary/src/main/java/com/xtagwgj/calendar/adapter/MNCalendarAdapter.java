@@ -16,7 +16,6 @@ import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
 import com.xtagwgj.calendar.model.MNCalendarConfig;
 import com.xtagwgj.calendar.utils.LunarCalendarUtils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +37,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Calendar currentShowCalendar;
 
-    private Date currentDate;
+    private Date currentDateZero;
 
     private MNCalendarConfig mnCalendarConfig;
 
@@ -66,13 +65,13 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public MNCalendarAdapter(Context context, ArrayList<Date> mDatas, ArrayList<Date> chooseDate, Calendar currentShowCalendar, MNCalendarConfig mnCalendarConfig) {
 
-        Date nowDate = new Date();
-        String now_yyy_MM_dd = sdf.format(nowDate);
-        try {
-            currentDate = sdf.parse(now_yyy_MM_dd);
-        } catch (ParseException e) {
-            currentDate = nowDate;
-        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        currentDateZero = calendar.getTime();
 
         this.context = context;
         this.mDatas = mDatas;
@@ -126,12 +125,11 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
 
             //判断是不是当天
-
-            String now_yyy_MM_dd = sdf.format(currentDate);
+            String now_yyy_MM_dd = sdf.format(currentDateZero);
             String position_yyy_MM_dd = sdf.format(datePosition);
 
             if (mnCalendarConfig.isMnCalendar_showCurrDay() && now_yyy_MM_dd.equals(position_yyy_MM_dd)
-                    && (datePosition.getMonth() == currentDate.getMonth() ||
+                    && (datePosition.getMonth() == currentDateZero.getMonth() ||
                     mnCalendarConfig.isMnCalendar_showOtherMonthInfo())) {
 //                myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
 //                myViewHolder.iv_today_bg.setBackground(context.getResources().getDrawable(R.drawable.mn_today_bg));
@@ -149,7 +147,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
             //本月 今日之前的字体颜色变化
-            if (datePosition.getMonth() == currentShowDate.getMonth() && datePosition.getTime() < currentDate.getTime()) {
+            if (datePosition.getMonth() == currentShowDate.getMonth() && datePosition.getTime() < currentDateZero.getTime()) {
                 myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorBeforeToday());
             }
 
@@ -241,7 +239,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         Date datePosition = mDatas.get(position);
 
                         //必须大于今天
-                        if (!mnCalendarConfig.isMnCalendar_canSelectDayBeforeNow() && datePosition.getTime() < currentDate.getTime()) {
+                        if (!mnCalendarConfig.isMnCalendar_canSelectDayBeforeNow() && datePosition.getTime() < currentDateZero.getTime()) {
                             Toast.makeText(context, R.string.prompt_choose_error, Toast.LENGTH_SHORT).show();
                             return;
                         }

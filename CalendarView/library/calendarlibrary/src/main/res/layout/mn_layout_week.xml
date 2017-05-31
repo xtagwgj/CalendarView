@@ -37,6 +37,6 @@
     <TextView
         android:id="@+id/tv_week_07"
         style="@style/style_title_weekend_day"
-        android:text="@string/prompt_sunday" />
+        android:text="@string/prompt_saturday" />
 
 </LinearLayout>
