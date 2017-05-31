@@ -1,10 +1,10 @@
 package com.xtagwgj.calendar;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,8 +21,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
+ * 日历控件
  * Created by xtagwgj on 2017/5/29.
  */
 
@@ -30,13 +32,13 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
 
     private static final String TAG = "MNCalendar";
 
-    private static SimpleDateFormat sdf_yyyy_MM = new SimpleDateFormat("yyyy-MM");
+    private static SimpleDateFormat sdf_yyyy_MM = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
 
     private Context context;
 
     private RecyclerView recyclerViewCalendar;
 
-    private MNGestureView mnGestureView;
+//    private MNGestureView mnGestureView;
 
     //日期
     private LinearLayout ll_week;
@@ -53,9 +55,6 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     private ImageView btn_left;
     private ImageView btn_right;
     private TextView tv_calendar_title;
-    //root
-    private LinearLayout ll_root;
-
 
     private OnCalendarItemClickListener onCalendarItemClickListener;
 
@@ -92,7 +91,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         initViews();
 
         //绘制日历
-        drawCalendar();
+        set2Today();
 
     }
 
@@ -100,7 +99,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         //绑定View
         View.inflate(context, R.layout.mn_layout_calendar, this);
         recyclerViewCalendar = (RecyclerView) findViewById(R.id.recyclerViewCalendar);
-        mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
+        MNGestureView mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
         ll_week = (LinearLayout) findViewById(R.id.ll_week);
         tv_week_01 = (TextView) findViewById(R.id.tv_week_01);
         tv_week_02 = (TextView) findViewById(R.id.tv_week_02);
@@ -113,7 +112,6 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         btn_left = (ImageView) findViewById(R.id.btn_left);
         btn_right = (ImageView) findViewById(R.id.btn_right);
         tv_calendar_title = (TextView) findViewById(R.id.tv_calendar_title);
-        ll_root = (LinearLayout) findViewById(R.id.ll_root);
 
         //初始化RecycleerView
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
@@ -150,6 +148,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
             rl_title_view.setVisibility(View.GONE);
         } else {
             rl_title_view.setVisibility(View.VISIBLE);
+            rl_title_view.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgTitle());
             //标题
             tv_calendar_title.setText(sdf_yyyy_MM.format(getCurrentDate()));
 
@@ -166,6 +165,8 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
             ll_week.setVisibility(View.GONE);
         } else {
             ll_week.setVisibility(View.VISIBLE);
+            ll_week.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgWeekend());
+
             //week的颜色值
             int mnCalendar_colorWeek = mnCalendarConfig.getMnCalendar_colorWeek();
             tv_week_01.setTextColor(mnCalendar_colorWeek);
@@ -176,6 +177,10 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
             tv_week_06.setTextColor(mnCalendar_colorWeek);
             tv_week_07.setTextColor(mnCalendar_colorWeek);
         }
+
+        //设置分割线的颜色
+        findViewById(R.id.split1).setBackgroundColor(mnCalendarConfig.getMnCalendar_colorSplit());
+        findViewById(R.id.split2).setBackgroundColor(mnCalendarConfig.getMnCalendar_colorSplit());
 
 
         //计算日期
@@ -188,9 +193,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         //获取当月第一天是星期几
         int day_of_week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
-
         int maxDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        Log.e("MnCalendar", "maxDays:" + maxDays);
 
         //移动到需要绘制的第一天
         calendar.add(Calendar.DAY_OF_MONTH, -day_of_week);
@@ -208,6 +211,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
         //设置Adapter
         mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, chooseDateList, currentCalendar, mnCalendarConfig);
         recyclerViewCalendar.setAdapter(mnCalendarAdapter);
+        recyclerViewCalendar.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgCalendar());
 
         //设置Item点击事件
         mnCalendarAdapter.setOnCalendarItemClickListener(onCalendarItemClickListener);
@@ -217,9 +221,9 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     /**
      * 设置点击事件
      *
-     * @param onCalendarItemClickListener
+     * @param onCalendarItemClickListener 日历点击监听事件，可为null
      */
-    public void setOnCalendarItemClickListener(OnCalendarItemClickListener onCalendarItemClickListener) {
+    public void setOnCalendarItemClickListener(@Nullable OnCalendarItemClickListener onCalendarItemClickListener) {
         this.onCalendarItemClickListener = onCalendarItemClickListener;
         //设置Item点击事件
         if (mnCalendarAdapter != null) {
@@ -230,16 +234,16 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     /**
      * 设置改变的监听
      *
-     * @param onCalendarChangeListener
+     * @param onCalendarChangeListener 日历月份改变的监听
      */
-    public void setOnCalendarChangeListener(OnCalendarChangeListener onCalendarChangeListener) {
+    public void setOnCalendarChangeListener(@Nullable OnCalendarChangeListener onCalendarChangeListener) {
         this.onCalendarChangeListener = onCalendarChangeListener;
     }
 
     /**
      * 获取当前的时间
      *
-     * @return
+     * @return 当前显示的月份
      */
     public Date getCurrentDate() {
         return currentCalendar.getTime();
@@ -248,7 +252,7 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     /**
      * 跳转到设置的月份
      *
-     * @param date
+     * @param date 设置的月份
      */
     public void setCurrentDate(Date date) {
         if (date != null) {
@@ -290,12 +294,13 @@ public class MNCalendar extends LinearLayout implements View.OnClickListener {
     /**
      * 配置参数
      *
-     * @param config
+     * @param config 配置
      */
     public void setConfig(MNCalendarConfig config) {
         this.mnCalendarConfig = config;
-        drawCalendar();
 
+
+        drawCalendar();
     }
 
     @Override

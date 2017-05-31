@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/mn_calendar_color_gray_white" android:state_pressed="true"></item>  <!-- 点击后的字体颜色 -->
-    <item android:drawable="@color/mn_calendar_color_white"></item>    <!-- 默认字体颜色 -->
+    <!--<item android:drawable="@color/mn_calendar_color_gray_white" android:state_pressed="true"></item>  &lt;!&ndash; 点击后的字体颜色 &ndash;&gt;-->
+    <!--<item android:drawable="@color/mn_calendar_color_white"></item>    &lt;!&ndash; 默认字体颜色 &ndash;&gt;-->
+
+    <item android:drawable="@color/color_half_transparent" android:state_pressed="true"/>  <!-- 点击后的字体颜色 -->
+    <item android:drawable="@color/color_transparent"/>    <!-- 默认字体颜色 -->
+
+
+
 </selector>

@@ -7,6 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
+ * 配置
  * Created by xtagwgj on 2017/5/29.
  */
 
@@ -33,12 +34,16 @@ public class MNCalendarConfig {
     private boolean mnCalendar_showOtherMonthInfo = true;
     //是否显示今天
     private boolean mnCalendar_showCurrDay = true;
+    //是否可以选择今日之前的日期
+    private boolean mnCalendar_canSelectDayBeforeNow = false;
     //日历星期的颜色值
     private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
     //日历Item的阳历的颜色值
     private int mnCalendar_colorSolar = Color.parseColor("#282828");
     //日历Item的阴历的颜色值
     private int mnCalendar_colorLunar = Color.parseColor("#979797");
+    //本月今日之前的日期颜色
+    private int mnCalendar_colorBeforeToday = Color.parseColor("#979797");
     //日历今天圆形背景
     private int mnCalendar_colorTodayBg = Color.parseColor("#282828");
     //日历不是当前月份的阳历的颜色
@@ -57,6 +62,14 @@ public class MNCalendarConfig {
     private int mnCalendar_swipeMode = SWIPE_MODE_HOR;
     //日期的选择方式
     private int mnCalendar_chooseType = DATE_CHOOSE_TYPE_SINGLE;
+    //标题的背景颜色
+    private int mnCalendar_colorBgTitle = Color.parseColor("#FFFFFF");
+    //星期栏目的背景颜色
+    private int mnCalendar_colorBgWeekend = Color.parseColor("#FFFFFF");
+    //具体日期的背景颜色
+    private int mnCalendar_colorBgCalendar = Color.parseColor("#FFFFFF");
+    //分割线的颜色值
+    private int mnCalendar_colorSplit = Color.parseColor("#CCCCCC");
 
 
     private MNCalendarConfig() {
@@ -210,6 +223,55 @@ public class MNCalendarConfig {
         this.mnCalendar_colorStartAndEndBg = mnCalendar_colorStartAndEndBg;
     }
 
+    public int getMnCalendar_colorBgTitle() {
+        return mnCalendar_colorBgTitle;
+    }
+
+    public void setMnCalendar_colorBgTitle(int mnCalendar_colorBgTitle) {
+        this.mnCalendar_colorBgTitle = mnCalendar_colorBgTitle;
+    }
+
+    public int getMnCalendar_colorBgWeekend() {
+        return mnCalendar_colorBgWeekend;
+    }
+
+    public void setMnCalendar_colorBgWeekend(int mnCalendar_colorBgWeekend) {
+        this.mnCalendar_colorBgWeekend = mnCalendar_colorBgWeekend;
+    }
+
+    public int getMnCalendar_colorBgCalendar() {
+        return mnCalendar_colorBgCalendar;
+    }
+
+    public void setMnCalendar_colorBgCalendar(int mnCalendar_colorBgCalendar) {
+        this.mnCalendar_colorBgCalendar = mnCalendar_colorBgCalendar;
+    }
+
+
+    public int getMnCalendar_colorBeforeToday() {
+        return mnCalendar_colorBeforeToday;
+    }
+
+    public void setMnCalendar_colorBeforeToday(int mnCalendar_colorBeforeToday) {
+        this.mnCalendar_colorBeforeToday = mnCalendar_colorBeforeToday;
+    }
+
+    public int getMnCalendar_colorSplit() {
+        return mnCalendar_colorSplit;
+    }
+
+    public void setMnCalendar_colorSplit(int mnCalendar_colorSplit) {
+        this.mnCalendar_colorSplit = mnCalendar_colorSplit;
+    }
+
+    public boolean isMnCalendar_canSelectDayBeforeNow() {
+        return mnCalendar_canSelectDayBeforeNow;
+    }
+
+    public void setMnCalendar_canSelectDayBeforeNow(boolean mnCalendar_canSelectDayBeforeNow) {
+        this.mnCalendar_canSelectDayBeforeNow = mnCalendar_canSelectDayBeforeNow;
+    }
+
     @Override
     public String toString() {
         return "MNCalendarConfig{" +
@@ -217,6 +279,7 @@ public class MNCalendarConfig {
                 ", mnCalendar_showWeek=" + mnCalendar_showWeek +
                 ", mnCalendar_showTitle=" + mnCalendar_showTitle +
                 ", mnCalendar_showOtherMonthInfo=" + mnCalendar_showOtherMonthInfo +
+                ", mnCalendar_showCurrDay=" + mnCalendar_showCurrDay +
                 ", mnCalendar_colorWeek=" + mnCalendar_colorWeek +
                 ", mnCalendar_colorSolar=" + mnCalendar_colorSolar +
                 ", mnCalendar_colorLunar=" + mnCalendar_colorLunar +
@@ -224,10 +287,14 @@ public class MNCalendarConfig {
                 ", mnCalendar_colorOtherMonth=" + mnCalendar_colorOtherMonth +
                 ", mnCalendar_colorTodayText=" + mnCalendar_colorTodayText +
                 ", mnCalendar_colorTitle=" + mnCalendar_colorTitle +
+                ", mnCalendar_colorStartAndEndBg=" + mnCalendar_colorStartAndEndBg +
                 ", mnCalendar_colorRangeBg=" + mnCalendar_colorRangeBg +
                 ", mnCalendar_colorRangeText=" + mnCalendar_colorRangeText +
                 ", mnCalendar_swipeMode=" + mnCalendar_swipeMode +
                 ", mnCalendar_chooseType=" + mnCalendar_chooseType +
+                ", mnCalendar_colorBgTitle=" + mnCalendar_colorBgTitle +
+                ", mnCalendar_colorBgWeekend=" + mnCalendar_colorBgWeekend +
+                ", mnCalendar_colorBgCalendar=" + mnCalendar_colorBgCalendar +
                 '}';
     }
 
@@ -327,6 +394,36 @@ public class MNCalendarConfig {
 
         public Builder setMnCalendar_showCurrDay(boolean mnCalendar_showCurrDay) {
             mnCalendarConfig.setMnCalendar_showCurrDay(mnCalendar_showCurrDay);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorBgTitle(int mnCalendar_colorBgTitle) {
+            mnCalendarConfig.setMnCalendar_colorBgTitle(mnCalendar_colorBgTitle);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorBgWeekend(int mnCalendar_colorBgWeekend) {
+            mnCalendarConfig.setMnCalendar_colorBgWeekend(mnCalendar_colorBgWeekend);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorBgCalendar(int mnCalendar_colorBgCalendar) {
+            mnCalendarConfig.setMnCalendar_colorBgCalendar(mnCalendar_colorBgCalendar);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorBeforeToday(int mnCalendar_colorBeforeToday) {
+            mnCalendarConfig.setMnCalendar_colorBeforeToday(mnCalendar_colorBeforeToday);
+            return this;
+        }
+
+        public Builder setMnCalendar_colorSplit(int mnCalendar_colorSplit) {
+            mnCalendarConfig.setMnCalendar_colorSplit(mnCalendar_colorSplit);
+            return this;
+        }
+
+        public Builder setMnCalendar_canSelectDayBeforeNow(boolean mnCalendar_canSelectDayBeforeNow) {
+            mnCalendarConfig.setMnCalendar_canSelectDayBeforeNow(mnCalendar_canSelectDayBeforeNow);
             return this;
         }
 

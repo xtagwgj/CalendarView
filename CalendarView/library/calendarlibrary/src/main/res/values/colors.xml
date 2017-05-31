@@ -37,4 +37,7 @@
     <!--日历Item的阴历的颜色值-->
     <color name="mn_calendar_color_text_lunar">#191B1F</color>
 
+    <color name="color_transparent">#00000000</color>
+    <color name="color_half_transparent">#1A000000</color>
+
 </resources>

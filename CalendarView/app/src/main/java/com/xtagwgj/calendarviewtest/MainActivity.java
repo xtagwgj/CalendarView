@@ -31,16 +31,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
+        MNCalendarConfig build = new MNCalendarConfig.Builder()
+                .setMnCalendar_showLunar(false)
+                .setMnCalendar_showWeek(true)
+                .setMnCalendar_showOtherMonthInfo(false)
+                .setMnCalendar_showTitle(true)
+                .setMnCalendar_colorTitle(Color.parseColor("#FFFFFF"))
+                .setMnCalendar_colorBgTitle(Color.parseColor("#1D1F26"))
+                .setMnCalendar_colorBgWeekend(Color.parseColor("#1D1F26"))
+                .setMnCalendar_colorWeek(Color.parseColor("#8B8C8D"))
+                .setMnCalendar_colorBgCalendar(Color.parseColor("#1D1F26"))
+                .setMnCalendar_colorBeforeToday(Color.parseColor("#8B8C8D"))
+                .setMnCalendar_colorStartAndEndBg(Color.parseColor("#0F445C"))
+                .setMnCalendar_colorRangeBg(Color.parseColor("#0F445C"))
+                .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
+                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
+                .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
+                .setMnCalendar_canSelectDayBeforeNow(true)
+                .build();
 
         mnCalendar = (MNCalendar) findViewById(R.id.mnCalendar);
 
-        MNCalendarConfig build = new MNCalendarConfig.Builder()
-                .setMnCalendar_showLunar(true)
-                .setMnCalendar_showWeek(true)
-                .setMnCalendar_showOtherMonthInfo(true)
-                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
-                .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
-                .build();
+
         mnCalendar.setConfig(build);
 
         /**
@@ -118,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
 //                        .setMnCalendar_colorTodayText("#000000")
 //                        .setMnCalendar_colorOtherMonth("#F1EDBD")
 //                        .setMnCalendar_colorTitle("#FF0000")
+                        .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
+                        .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
                         .setMnCalendar_showLunar(true)
                         .setMnCalendar_showWeek(true)
                         .setMnCalendar_showOtherMonthInfo(false)
