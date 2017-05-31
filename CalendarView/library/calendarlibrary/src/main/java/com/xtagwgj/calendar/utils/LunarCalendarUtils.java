@@ -51,8 +51,9 @@ public class LunarCalendarUtils {
 
     /**
      * 传回农历year年month月的总天数
-     * @param year 要计算的年份
-     * @param month        要计算的月
+     *
+     * @param year  要计算的年份
+     * @param month 要计算的月
      * @return 传回天数
      */
     public static int daysInMonth(int year, int month) {
@@ -61,9 +62,10 @@ public class LunarCalendarUtils {
 
     /**
      * 传回农历year年month月的总天数
-     * @param year 要计算的年份
-     * @param month        要计算的月
-     * @param leap 当月是否是闰月
+     *
+     * @param year  要计算的年份
+     * @param month 要计算的月
+     * @param leap  当月是否是闰月
      * @return 传回天数，如果闰月是错误的，返回0.
      */
     public static int daysInMonth(int year, int month, boolean leap) {
@@ -159,6 +161,20 @@ public class LunarCalendarUtils {
             return "初十";
         else
             return chineseTen[day / 10] + CHINESE_NUMBER[n];
+    }
+
+    /**
+     * 返回农历中文格式
+     *
+     * @param lunar
+     * @return
+     */
+    public static String getLunarDayString(Lunar lunar) {
+        String festival = getLunarHoliday(lunar.lunarYear, lunar.lunarMonth, lunar.lunarDay);
+        if (festival == null || festival.length() == 0) {
+            return getLunarDayString(lunar.lunarDay);
+        } else
+            return festival;
     }
 
     private static int[] lunar_month_days = {1887, 0x1694, 0x16aa, 0x4ad5, 0xab6, 0xc4b7, 0x4ae, 0xa56, 0xb52a, 0x1d2a,

@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">CalendarLibrary</string>
+    <string name="prompt_monday">一</string>
+    <string name="prompt_tuesday">二</string>
+    <string name="prompt_wednesday">三</string>
+    <string name="prompt_thursday">四</string>
+    <string name="prompt_friday">五</string>
+    <string name="prompt_saturday">六</string>
+    <string name="prompt_sunday">日</string>
+
+    <string name="prompt_start">开始</string>
+    <string name="prompt_end">结束</string>
+
+    <string name="prompt_choose_error">选择的日期必须大于今天</string>
+
 </resources>

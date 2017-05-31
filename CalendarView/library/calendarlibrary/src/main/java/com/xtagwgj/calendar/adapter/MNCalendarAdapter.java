@@ -154,7 +154,8 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 int month = cal.get(Calendar.MONTH) + 1;
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 LunarCalendarUtils.Lunar solarToLunar = LunarCalendarUtils.solarToLunar(new LunarCalendarUtils.Solar(year, month, day));
-                String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar.lunarDay);
+//                String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar.lunarDay);
+                String lunarDayString = LunarCalendarUtils.getLunarDayString(solarToLunar);
                 myViewHolder.tvDay_lunar.setText(lunarDayString);
 
 
@@ -188,7 +189,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                     myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_start);
                     myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
-                    myViewHolder.tvDay_lunar.setText("开始");
+                    myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_start));
                     myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
                     myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
                     //动态修改颜色
@@ -201,7 +202,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                     myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_end);
                     myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
-                    myViewHolder.tvDay_lunar.setText("结束");
+                    myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_end));
                     myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
                     myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
                     //动态修改颜色
@@ -234,7 +235,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                         //必须大于今天
                         if (!mnCalendarConfig.isMnCalendar_canSelectDayBeforeNow() && datePosition.getTime() < currentDate.getTime()) {
-                            Toast.makeText(context, "选择的日期必须大于今天", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, R.string.prompt_choose_error, Toast.LENGTH_SHORT).show();
                             return;
                         }
 

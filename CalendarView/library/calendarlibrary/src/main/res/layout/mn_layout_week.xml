@@ -7,36 +7,36 @@
     <TextView
         android:id="@+id/tv_week_01"
         style="@style/style_title_weekend_day"
-        android:text="日" />
+        android:text="@string/prompt_sunday" />
 
     <TextView
         android:id="@+id/tv_week_02"
         style="@style/style_title_weekend_day"
-        android:text="一" />
+        android:text="@string/prompt_monday" />
 
     <TextView
         android:id="@+id/tv_week_03"
         style="@style/style_title_weekend_day"
-        android:text="二" />
+        android:text="@string/prompt_tuesday" />
 
     <TextView
         android:id="@+id/tv_week_04"
         style="@style/style_title_weekend_day"
-        android:text="三" />
+        android:text="@string/prompt_wednesday" />
 
     <TextView
         android:id="@+id/tv_week_05"
         style="@style/style_title_weekend_day"
-        android:text="四" />
+        android:text="@string/prompt_thursday" />
 
     <TextView
         android:id="@+id/tv_week_06"
         style="@style/style_title_weekend_day"
-        android:text="五" />
+        android:text="@string/prompt_friday" />
 
     <TextView
         android:id="@+id/tv_week_07"
         style="@style/style_title_weekend_day"
-        android:text="六" />
+        android:text="@string/prompt_sunday" />
 
 </LinearLayout>

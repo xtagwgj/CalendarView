@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         MNCalendarConfig build = new MNCalendarConfig.Builder()
-                .setMnCalendar_showLunar(false)
+                .setMnCalendar_showLunar(true)
                 .setMnCalendar_showWeek(true)
                 .setMnCalendar_showOtherMonthInfo(false)
                 .setMnCalendar_showTitle(true)

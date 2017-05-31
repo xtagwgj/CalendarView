@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CalendarLibrary</string>
+    <string name="prompt_monday">Mon.</string>
+    <string name="prompt_tuesday">Tues.</string>
+    <string name="prompt_wednesday">Wed.</string>
+    <string name="prompt_thursday">Thurs.</string>
+    <string name="prompt_friday">Fri.</string>
+    <string name="prompt_saturday">Sta.</string>
+    <string name="prompt_sunday">Sun.</string>
+
+    <string name="prompt_start">Start</string>
+    <string name="prompt_end">End</string>
+
+    <string name="prompt_choose_error">The date of selection must be greater than today</string>
+</resources>
