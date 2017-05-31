@@ -37,6 +37,10 @@ public class MNCalendarConfig {
     private boolean mnCalendar_showCurrDay = true;
     //是否可以选择今日之前的日期
     private boolean mnCalendar_canSelectDayBeforeNow = false;
+    //区间选择时，是否显示开始、结束的文字
+    private boolean mnCalendar_showRangeText = true;
+    //内容是否可点击
+    private boolean mnCalendar_calendarClickable = true;
     //日历星期的颜色值
     private int mnCalendar_colorWeek = Color.parseColor("#5E5E5E");
     //日历Item的阳历的颜色值
@@ -88,191 +92,205 @@ public class MNCalendarConfig {
 
     }
 
-    public boolean isMnCalendar_showCurrDay() {
-        return mnCalendar_showCurrDay;
-    }
-
-    public void setMnCalendar_showCurrDay(boolean mnCalendar_showCurrDay) {
-        this.mnCalendar_showCurrDay = mnCalendar_showCurrDay;
-    }
-
     public boolean isMnCalendar_showLunar() {
         return mnCalendar_showLunar;
-    }
-
-    public void setMnCalendar_showLunar(boolean mnCalendar_showLunar) {
-        this.mnCalendar_showLunar = mnCalendar_showLunar;
     }
 
     public boolean isMnCalendar_showWeek() {
         return mnCalendar_showWeek;
     }
 
-    public void setMnCalendar_showWeek(boolean mnCalendar_showWeek) {
-        this.mnCalendar_showWeek = mnCalendar_showWeek;
-    }
-
     public boolean isMnCalendar_showTitle() {
         return mnCalendar_showTitle;
-    }
-
-    public void setMnCalendar_showTitle(boolean mnCalendar_showTitle) {
-        this.mnCalendar_showTitle = mnCalendar_showTitle;
     }
 
     public boolean isMnCalendar_showOtherMonthInfo() {
         return mnCalendar_showOtherMonthInfo;
     }
 
-    public void setMnCalendar_showOtherMonthInfo(boolean mnCalendar_showOtherMonthInfo) {
-        this.mnCalendar_showOtherMonthInfo = mnCalendar_showOtherMonthInfo;
-    }
-
-    public int getMnCalendar_colorWeek() {
-        return mnCalendar_colorWeek;
-    }
-
-    public void setMnCalendar_colorWeek(int mnCalendar_colorWeek) {
-        this.mnCalendar_colorWeek = mnCalendar_colorWeek;
-    }
-
-    public int getMnCalendar_colorSolar() {
-        return mnCalendar_colorSolar;
-    }
-
-    public void setMnCalendar_colorSolar(int mnCalendar_colorSolar) {
-        this.mnCalendar_colorSolar = mnCalendar_colorSolar;
-    }
-
-    public int getMnCalendar_colorLunar() {
-        return mnCalendar_colorLunar;
-    }
-
-    public void setMnCalendar_colorLunar(int mnCalendar_colorLunar) {
-        this.mnCalendar_colorLunar = mnCalendar_colorLunar;
-    }
-
-    public int getMnCalendar_colorTodayBg() {
-        return mnCalendar_colorTodayBg;
-    }
-
-    public void setMnCalendar_colorTodayBg(int mnCalendar_colorTodayBg) {
-        this.mnCalendar_colorTodayBg = mnCalendar_colorTodayBg;
-    }
-
-    public int getMnCalendar_colorOtherMonth() {
-        return mnCalendar_colorOtherMonth;
-    }
-
-    public void setMnCalendar_colorOtherMonth(int mnCalendar_colorOtherMonth) {
-        this.mnCalendar_colorOtherMonth = mnCalendar_colorOtherMonth;
-    }
-
-    public int getMnCalendar_colorTodayText() {
-        return mnCalendar_colorTodayText;
-    }
-
-    public void setMnCalendar_colorTodayText(int mnCalendar_colorTodayText) {
-        this.mnCalendar_colorTodayText = mnCalendar_colorTodayText;
-    }
-
-    public int getMnCalendar_colorTitle() {
-        return mnCalendar_colorTitle;
-    }
-
-    public void setMnCalendar_colorTitle(int mnCalendar_colorTitle) {
-        this.mnCalendar_colorTitle = mnCalendar_colorTitle;
-    }
-
-    public int getMnCalendar_colorRangeBg() {
-        return mnCalendar_colorRangeBg;
-    }
-
-    public void setMnCalendar_colorRangeBg(int mnCalendar_colorRangeBg) {
-        this.mnCalendar_colorRangeBg = mnCalendar_colorRangeBg;
-    }
-
-    public int getMnCalendar_colorRangeText() {
-        return mnCalendar_colorRangeText;
-    }
-
-    public void setMnCalendar_colorRangeText(int mnCalendar_colorRangeText) {
-        this.mnCalendar_colorRangeText = mnCalendar_colorRangeText;
-    }
-
-    public int getMnCalendar_swipeMode() {
-        return mnCalendar_swipeMode;
-    }
-
-    public void setMnCalendar_swipeMode(int mnCalendar_swipeMode) {
-        this.mnCalendar_swipeMode = mnCalendar_swipeMode;
-    }
-
-    public int getMnCalendar_chooseType() {
-        return mnCalendar_chooseType;
-    }
-
-    public void setMnCalendar_chooseType(@ChooseType int mnCalendar_chooseType) {
-        this.mnCalendar_chooseType = mnCalendar_chooseType;
-    }
-
-    public int getMnCalendar_colorStartAndEndBg() {
-        return mnCalendar_colorStartAndEndBg;
-    }
-
-    public void setMnCalendar_colorStartAndEndBg(int mnCalendar_colorStartAndEndBg) {
-        this.mnCalendar_colorStartAndEndBg = mnCalendar_colorStartAndEndBg;
-    }
-
-    public int getMnCalendar_colorBgTitle() {
-        return mnCalendar_colorBgTitle;
-    }
-
-    public void setMnCalendar_colorBgTitle(int mnCalendar_colorBgTitle) {
-        this.mnCalendar_colorBgTitle = mnCalendar_colorBgTitle;
-    }
-
-    public int getMnCalendar_colorBgWeekend() {
-        return mnCalendar_colorBgWeekend;
-    }
-
-    public void setMnCalendar_colorBgWeekend(int mnCalendar_colorBgWeekend) {
-        this.mnCalendar_colorBgWeekend = mnCalendar_colorBgWeekend;
-    }
-
-    public int getMnCalendar_colorBgCalendar() {
-        return mnCalendar_colorBgCalendar;
-    }
-
-    public void setMnCalendar_colorBgCalendar(int mnCalendar_colorBgCalendar) {
-        this.mnCalendar_colorBgCalendar = mnCalendar_colorBgCalendar;
-    }
-
-
-    public int getMnCalendar_colorBeforeToday() {
-        return mnCalendar_colorBeforeToday;
-    }
-
-    public void setMnCalendar_colorBeforeToday(int mnCalendar_colorBeforeToday) {
-        this.mnCalendar_colorBeforeToday = mnCalendar_colorBeforeToday;
-    }
-
-    public int getMnCalendar_colorSplit() {
-        return mnCalendar_colorSplit;
-    }
-
-    public void setMnCalendar_colorSplit(int mnCalendar_colorSplit) {
-        this.mnCalendar_colorSplit = mnCalendar_colorSplit;
+    public boolean isMnCalendar_showCurrDay() {
+        return mnCalendar_showCurrDay;
     }
 
     public boolean isMnCalendar_canSelectDayBeforeNow() {
         return mnCalendar_canSelectDayBeforeNow;
     }
 
-    public void setMnCalendar_canSelectDayBeforeNow(boolean mnCalendar_canSelectDayBeforeNow) {
+    public boolean isMnCalendar_showRangeText() {
+        return mnCalendar_showRangeText;
+    }
+
+    public int getMnCalendar_colorWeek() {
+        return mnCalendar_colorWeek;
+    }
+
+    public int getMnCalendar_colorSolar() {
+        return mnCalendar_colorSolar;
+    }
+
+    public int getMnCalendar_colorLunar() {
+        return mnCalendar_colorLunar;
+    }
+
+    public int getMnCalendar_colorBeforeToday() {
+        return mnCalendar_colorBeforeToday;
+    }
+
+    public int getMnCalendar_colorTodayBg() {
+        return mnCalendar_colorTodayBg;
+    }
+
+    public int getMnCalendar_colorOtherMonth() {
+        return mnCalendar_colorOtherMonth;
+    }
+
+    public int getMnCalendar_colorTodayText() {
+        return mnCalendar_colorTodayText;
+    }
+
+    public int getMnCalendar_colorTitle() {
+        return mnCalendar_colorTitle;
+    }
+
+    public int getMnCalendar_colorStartAndEndBg() {
+        return mnCalendar_colorStartAndEndBg;
+    }
+
+    public int getMnCalendar_colorRangeBg() {
+        return mnCalendar_colorRangeBg;
+    }
+
+    public int getMnCalendar_colorRangeText() {
+        return mnCalendar_colorRangeText;
+    }
+
+    public int getMnCalendar_swipeMode() {
+        return mnCalendar_swipeMode;
+    }
+
+    public int getMnCalendar_chooseType() {
+        return mnCalendar_chooseType;
+    }
+
+    public int getMnCalendar_colorBgTitle() {
+        return mnCalendar_colorBgTitle;
+    }
+
+    public int getMnCalendar_colorBgWeekend() {
+        return mnCalendar_colorBgWeekend;
+    }
+
+    public int getMnCalendar_colorBgCalendar() {
+        return mnCalendar_colorBgCalendar;
+    }
+
+    public int getMnCalendar_colorSplit() {
+        return mnCalendar_colorSplit;
+    }
+
+    public boolean isMnCalendar_calendarClickable() {
+        return mnCalendar_calendarClickable;
+    }
+
+    public void setMnCalendar_calendarClickable(boolean mnCalendar_calendarClickable) {
+        this.mnCalendar_calendarClickable = mnCalendar_calendarClickable;
+    }
+
+    private void setMnCalendar_showLunar(boolean mnCalendar_showLunar) {
+        this.mnCalendar_showLunar = mnCalendar_showLunar;
+    }
+
+    private void setMnCalendar_showWeek(boolean mnCalendar_showWeek) {
+        this.mnCalendar_showWeek = mnCalendar_showWeek;
+    }
+
+    private void setMnCalendar_showTitle(boolean mnCalendar_showTitle) {
+        this.mnCalendar_showTitle = mnCalendar_showTitle;
+    }
+
+    private void setMnCalendar_showOtherMonthInfo(boolean mnCalendar_showOtherMonthInfo) {
+        this.mnCalendar_showOtherMonthInfo = mnCalendar_showOtherMonthInfo;
+    }
+
+    private void setMnCalendar_showCurrDay(boolean mnCalendar_showCurrDay) {
+        this.mnCalendar_showCurrDay = mnCalendar_showCurrDay;
+    }
+
+    private void setMnCalendar_canSelectDayBeforeNow(boolean mnCalendar_canSelectDayBeforeNow) {
         this.mnCalendar_canSelectDayBeforeNow = mnCalendar_canSelectDayBeforeNow;
     }
 
+    private void setMnCalendar_showRangeText(boolean mnCalendar_showRangeText) {
+        this.mnCalendar_showRangeText = mnCalendar_showRangeText;
+    }
+
+    private void setMnCalendar_colorWeek(int mnCalendar_colorWeek) {
+        this.mnCalendar_colorWeek = mnCalendar_colorWeek;
+    }
+
+    private void setMnCalendar_colorSolar(int mnCalendar_colorSolar) {
+        this.mnCalendar_colorSolar = mnCalendar_colorSolar;
+    }
+
+    private void setMnCalendar_colorLunar(int mnCalendar_colorLunar) {
+        this.mnCalendar_colorLunar = mnCalendar_colorLunar;
+    }
+
+    private void setMnCalendar_colorBeforeToday(int mnCalendar_colorBeforeToday) {
+        this.mnCalendar_colorBeforeToday = mnCalendar_colorBeforeToday;
+    }
+
+    private void setMnCalendar_colorTodayBg(int mnCalendar_colorTodayBg) {
+        this.mnCalendar_colorTodayBg = mnCalendar_colorTodayBg;
+    }
+
+    private void setMnCalendar_colorOtherMonth(int mnCalendar_colorOtherMonth) {
+        this.mnCalendar_colorOtherMonth = mnCalendar_colorOtherMonth;
+    }
+
+    private void setMnCalendar_colorTodayText(int mnCalendar_colorTodayText) {
+        this.mnCalendar_colorTodayText = mnCalendar_colorTodayText;
+    }
+
+    private void setMnCalendar_colorTitle(int mnCalendar_colorTitle) {
+        this.mnCalendar_colorTitle = mnCalendar_colorTitle;
+    }
+
+    private void setMnCalendar_colorStartAndEndBg(int mnCalendar_colorStartAndEndBg) {
+        this.mnCalendar_colorStartAndEndBg = mnCalendar_colorStartAndEndBg;
+    }
+
+    private void setMnCalendar_colorRangeBg(int mnCalendar_colorRangeBg) {
+        this.mnCalendar_colorRangeBg = mnCalendar_colorRangeBg;
+    }
+
+    private void setMnCalendar_colorRangeText(int mnCalendar_colorRangeText) {
+        this.mnCalendar_colorRangeText = mnCalendar_colorRangeText;
+    }
+
+    private void setMnCalendar_swipeMode(int mnCalendar_swipeMode) {
+        this.mnCalendar_swipeMode = mnCalendar_swipeMode;
+    }
+
+    private void setMnCalendar_chooseType(int mnCalendar_chooseType) {
+        this.mnCalendar_chooseType = mnCalendar_chooseType;
+    }
+
+    private void setMnCalendar_colorBgTitle(int mnCalendar_colorBgTitle) {
+        this.mnCalendar_colorBgTitle = mnCalendar_colorBgTitle;
+    }
+
+    private void setMnCalendar_colorBgWeekend(int mnCalendar_colorBgWeekend) {
+        this.mnCalendar_colorBgWeekend = mnCalendar_colorBgWeekend;
+    }
+
+    private void setMnCalendar_colorBgCalendar(int mnCalendar_colorBgCalendar) {
+        this.mnCalendar_colorBgCalendar = mnCalendar_colorBgCalendar;
+    }
+
+    private void setMnCalendar_colorSplit(int mnCalendar_colorSplit) {
+        this.mnCalendar_colorSplit = mnCalendar_colorSplit;
+    }
 
     @Override
     public String toString() {
@@ -426,6 +444,16 @@ public class MNCalendarConfig {
 
         public Builder setMnCalendar_canSelectDayBeforeNow(boolean mnCalendar_canSelectDayBeforeNow) {
             mnCalendarConfig.setMnCalendar_canSelectDayBeforeNow(mnCalendar_canSelectDayBeforeNow);
+            return this;
+        }
+
+        public Builder setMnCalendar_showRangeText(boolean mnCalendar_showRangeText) {
+            mnCalendarConfig.setMnCalendar_showRangeText(mnCalendar_showRangeText);
+            return this;
+        }
+
+        public Builder setMnCalendar_calendarClickable(boolean mnCalendar_calendarClickable) {
+            mnCalendarConfig.setMnCalendar_calendarClickable(mnCalendar_calendarClickable);
             return this;
         }
 

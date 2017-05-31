@@ -348,6 +348,12 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     }
 
     @Override
+    public void setClickable(boolean clickable) {
+        super.setClickable(clickable);
+        mnCalendarConfig.setMnCalendar_calendarClickable(clickable);
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_left) {
             setLastMonth();

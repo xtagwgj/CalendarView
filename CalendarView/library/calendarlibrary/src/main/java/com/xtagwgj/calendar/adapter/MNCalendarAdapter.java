@@ -203,12 +203,15 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (mnCalendarConfig.getMnCalendar_chooseType() == MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
 
                 //判断是不是点击了起始日期
-                if (startDate != null && startDate.getTime() == datePosition.getTime() &&
-                        (datePosition.getMonth() == currentShowDate.getMonth() || showInCalendarInfos)) {
+                if (startDate != null && startDate.getTime() == datePosition.getTime() ) {
                     myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                     myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_start);
-                    myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
-                    myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_start));
+
+                    if (mnCalendarConfig.isMnCalendar_showRangeText()) {
+                        myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_start));
+                        myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+                    }
+
                     myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
                     myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
 
@@ -223,12 +226,14 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
 
                 //判断是不是点击了结束日期
-                if (endDate != null && endDate.getTime() == datePosition.getTime() &&
-                        (datePosition.getMonth() == currentShowDate.getMonth() || showInCalendarInfos)) {
+                if (endDate != null && endDate.getTime() == datePosition.getTime()) {
                     myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                     myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_end);
-                    myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
-                    myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_end));
+
+                    if (mnCalendarConfig.isMnCalendar_showRangeText()) {
+                        myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
+                        myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_end));
+                    }
                     myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
                     myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
 
@@ -243,8 +248,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
 
                 //判断是不是大于起始日期 在区间内
-                if (startDate != null && endDate != null &&
-                        (datePosition.getMonth() == currentShowDate.getMonth() || showInCalendarInfos)) {
+                if (startDate != null && endDate != null ) {
                     if (datePosition.getTime() > startDate.getTime() && datePosition.getTime() < endDate.getTime()) {
                         myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                         myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_centre);
@@ -265,13 +269,12 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             }
 
-            if (this.onCalendarItemClickListener != null) {
+            if (this.onCalendarItemClickListener != null && mnCalendarConfig.isMnCalendar_calendarClickable()) {
                 myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Date currentShowDate = currentShowCalendar.getTime();
                         Date datePosition = mDatas.get(position);
-
 
                         //必须大于今天
                         if (!mnCalendarConfig.isMnCalendar_canSelectDayBeforeNow() && datePosition.getTime() < currentDateZero.getTime()) {
@@ -338,8 +341,6 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                         }
                                     }
 
-                                    //刷新
-//                                    notifyDataSetChanged();
                                     break;
                             }
 
@@ -366,7 +367,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private ImageView currDayImageView;
         private RelativeLayout rlContent;
 
-        public MyViewHolder(View itemView) {
+         MyViewHolder(View itemView) {
             super(itemView);
             tvDay = (TextView) itemView.findViewById(R.id.tvDay);
             tvDay_lunar = (TextView) itemView.findViewById(R.id.tvDay_lunar);

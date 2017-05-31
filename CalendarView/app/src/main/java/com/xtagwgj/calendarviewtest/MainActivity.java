@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_HOR)
                 .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE)
                 .setMnCalendar_canSelectDayBeforeNow(false)
+                .setMnCalendar_showRangeText(false)
                 .build();
 
         mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRangeChoose(Date startDate, Date endDate) {
                 Toast.makeText(context, "单击:" + sdf2.format(startDate.getTime()) + "到" + sdf2.format(endDate.getTime()), Toast.LENGTH_SHORT).show();
+                mnCalendar.setClickable(false);
 
             }
 
