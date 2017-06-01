@@ -188,25 +188,24 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 myViewHolder.tvDay_lunar.setVisibility(View.GONE);
             }
 
-            //判断是否显示 非当前月信息的显示
-            boolean showInCalendarInfos = datePosition.getMonth() != currentShowDate.getMonth() &&
-                    !mnCalendarConfig.isMnCalendar_showOtherMonthInfo();
-
             //非当前月信息的显示
-            if (showInCalendarInfos) {
-                myViewHolder.tvDay_lunar.setVisibility(View.GONE);
-                myViewHolder.tvDay.setVisibility(View.INVISIBLE);
-                myViewHolder.currDayImageView.setVisibility(View.GONE);
-                myViewHolder.rlContent.setEnabled(false);
+            if (datePosition.getMonth() != currentShowDate.getMonth() &&
+                    !mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
+//                myViewHolder.tvDay_lunar.setVisibility(View.GONE);
+//                myViewHolder.tvDay.setVisibility(View.INVISIBLE);
+//                myViewHolder.currDayImageView.setVisibility(View.GONE);
 
+                myViewHolder.rlContent.setEnabled(false);
+                myViewHolder.rlContent.setVisibility(View.INVISIBLE);
                 //如果不显示非当前月的信息，跳出界面绘制，执行下一个界面的绘制
                 return;
             } else {
                 myViewHolder.rlContent.setEnabled(true);
+                myViewHolder.rlContent.setVisibility(View.VISIBLE);
             }
 
-            if (mnCalendarConfig.getMnCalendar_chooseType() == MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
-//            if (startDate != null || endDate != null) {
+//            if (mnCalendarConfig.getMnCalendar_chooseType() == MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
+            if (startDate != null || endDate != null) {
                 //判断是不是点击了起始日期
                 if (startDate != null && startDate.getTime() == datePosition.getTime()) {
                     myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
@@ -270,9 +269,13 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         }
                     }
                 }
-
-
             }
+
+
+            if (datePosition.getMonth() == currentShowDate.getMonth() && myViewHolder.tvDay.getVisibility() != View.VISIBLE) {
+                myViewHolder.tvDay.setVisibility(View.VISIBLE);
+            }
+
 
             if (this.onCalendarItemClickListener != null && mnCalendarConfig.isMnCalendar_calendarClickable()) {
                 myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
