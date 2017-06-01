@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -46,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 .setMnCalendar_colorRangeBg(Color.parseColor("#174254"))
                 .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
                 .setMnCalendar_colorSplit(Color.parseColor("#222427"))
-                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_HOR)
+                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
                 .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE)
                 .setMnCalendar_canSelectDayBeforeNow(false)
-                .setMnCalendar_showRangeText(false)
+                .setMnCalendar_showRangeText(true)
                 .build();
 
         mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
@@ -57,10 +58,19 @@ public class MainActivity extends AppCompatActivity {
 
         mnCalendar.setConfig(build);
 
-        ArrayList<Date> dates = new ArrayList<>();
-        dates.add(Calendar.getInstance().getTime());
-        mnCalendar.setChooseDateList(dates);
+//        ArrayList<Date> dates = new ArrayList<>();
+//        dates.add(Calendar.getInstance().getTime());
+//        mnCalendar.setChooseDateList(dates);
 
+        Calendar canlendar1 = Calendar.getInstance();
+        canlendar1.set(Calendar.DAY_OF_MONTH, 3);
+
+        Log.e("22", canlendar1.getTime().toString());
+
+        Calendar canlendar2 = Calendar.getInstance();
+        canlendar2.set(Calendar.DAY_OF_MONTH, 13);
+
+        mnCalendar.setRangeDate(canlendar1.getTime(), canlendar2.getTime());
 
         /**
          * Item点击监听
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRangeChoose(Date startDate, Date endDate) {
                 Toast.makeText(context, "单击:" + sdf2.format(startDate.getTime()) + "到" + sdf2.format(endDate.getTime()), Toast.LENGTH_SHORT).show();
-                mnCalendar.setClickable(false);
+//                mnCalendar.setClickable(false);
 
             }
 

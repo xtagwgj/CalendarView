@@ -93,7 +93,12 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.endDate = endDate;
 
         notifyDataSetChanged();
+    }
 
+    public void refreshRangeDate(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -201,9 +206,9 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
 
             if (mnCalendarConfig.getMnCalendar_chooseType() == MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
-
+//            if (startDate != null || endDate != null) {
                 //判断是不是点击了起始日期
-                if (startDate != null && startDate.getTime() == datePosition.getTime() ) {
+                if (startDate != null && startDate.getTime() == datePosition.getTime()) {
                     myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                     myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_start);
 
@@ -216,7 +221,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
 
                     //如果小圆点显示就隐藏
-                    if (((MyViewHolder) holder).currDayImageView.getVisibility() == View.VISIBLE) {
+                    if (mnCalendarConfig.isMnCalendar_showRangeText() && ((MyViewHolder) holder).currDayImageView.getVisibility() == View.VISIBLE) {
                         ((MyViewHolder) holder).currDayImageView.setVisibility(View.INVISIBLE);
                     }
 
@@ -238,7 +243,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
 
                     //如果小圆点显示就隐藏
-                    if (((MyViewHolder) holder).currDayImageView.getVisibility() == View.VISIBLE) {
+                    if (mnCalendarConfig.isMnCalendar_showRangeText() && ((MyViewHolder) holder).currDayImageView.getVisibility() == View.VISIBLE) {
                         ((MyViewHolder) holder).currDayImageView.setVisibility(View.INVISIBLE);
                     }
 
@@ -248,7 +253,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
 
                 //判断是不是大于起始日期 在区间内
-                if (startDate != null && endDate != null ) {
+                if (startDate != null && endDate != null) {
                     if (datePosition.getTime() > startDate.getTime() && datePosition.getTime() < endDate.getTime()) {
                         myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                         myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_centre);
@@ -367,7 +372,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private ImageView currDayImageView;
         private RelativeLayout rlContent;
 
-         MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             tvDay = (TextView) itemView.findViewById(R.id.tvDay);
             tvDay_lunar = (TextView) itemView.findViewById(R.id.tvDay_lunar);

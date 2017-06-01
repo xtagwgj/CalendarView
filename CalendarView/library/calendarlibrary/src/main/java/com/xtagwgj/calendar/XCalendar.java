@@ -14,10 +14,10 @@ import android.widget.TextView;
 import com.xtagwgj.calendar.adapter.MNCalendarAdapter;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
+import com.xtagwgj.calendar.listeners.RecyclerViewClickListener;
 import com.xtagwgj.calendar.model.MNCalendarConfig;
 import com.xtagwgj.calendar.view.MNGestureView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -122,6 +122,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 7);
         recyclerViewCalendar.setLayoutManager(gridLayoutManager);
 
+        mnGestureView.setSWIPE_MODE(mnCalendarConfig.getMnCalendar_swipeMode());
         //手势监听
         mnGestureView.setOnSwipeListener(new MNGestureView.OnSwipeListener() {
             @Override
@@ -131,6 +132,16 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
 
             @Override
             public void leftSwipe() {
+                setNextMonth();
+            }
+
+            @Override
+            public void topSwipe() {
+                setLastMonth();
+            }
+
+            @Override
+            public void bottomSwipe() {
                 setNextMonth();
             }
         });
@@ -235,6 +246,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
 
         recyclerViewCalendar.setAdapter(mnCalendarAdapter);
         recyclerViewCalendar.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgCalendar());
+        recyclerViewCalendar.addOnItemTouchListener(new RecyclerViewClickListener(getContext(), recyclerViewCalendar, null));
 
         //设置Item点击事件
         mnCalendarAdapter.setOnCalendarItemClickListener(onCalendarItemClickListener);
@@ -320,10 +332,12 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
      * @param config 配置
      */
     public void setConfig(MNCalendarConfig config) {
-        this.mnCalendarConfig = config;
+        this.mnCalendarConfig = config != null ? config : new MNCalendarConfig.Builder().build();
 
-        if (mnGestureView != null)
-            mnGestureView.setCanSwipe(config.getMnCalendar_swipeMode() != MNCalendarConfig.SWIPE_MODE_NONE);
+        if (mnGestureView != null) {
+            mnGestureView.setCanSwipe(mnCalendarConfig.getMnCalendar_swipeMode() != MNCalendarConfig.SWIPE_MODE_NONE);
+            mnGestureView.setSWIPE_MODE(mnCalendarConfig.getMnCalendar_swipeMode());
+        }
 
         drawCalendar();
     }
@@ -332,19 +346,49 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         this.chooseDateList = chooseDate == null ? new ArrayList<Date>() : chooseDate;
 
         if (chooseDateList.size() > 0) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             for (int i = 0; i < chooseDateList.size(); i++) {
-                Date nowDate = chooseDateList.get(i);
-                String now_yyy_MM_dd = sdf.format(nowDate);
-                try {
-                    nowDate = sdf.parse(now_yyy_MM_dd);
-                } catch (ParseException e) {
-                }
-
-                chooseDateList.set(i, nowDate);
+                chooseDateList.set(i, parseDate2Zero(chooseDateList.get(i)));
             }
         }
         mnCalendarAdapter.refreshChooseDate(chooseDateList);
+    }
+
+    /**
+     * 将时间重置到0点
+     *
+     * @param date 时间
+     * @return 0点的时间
+     */
+    private Date parseDate2Zero(Date date) {
+
+        if (date == null)
+            return null;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        //将时间移到0点
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTime();
+    }
+
+    /**
+     * 设置选中范围的时间
+     *
+     * @param startDate 开始时间
+     * @param endDate   结束时间
+     */
+    public void setRangeDate(Date startDate, Date endDate) {
+        this.startDate = parseDate2Zero(startDate);
+        this.endDate = parseDate2Zero(endDate);
+        if (mnCalendarAdapter != null) {
+            mnCalendarAdapter.refreshRangeDate(startDate, endDate);
+        } else {
+            drawCalendar();
+        }
     }
 
     @Override

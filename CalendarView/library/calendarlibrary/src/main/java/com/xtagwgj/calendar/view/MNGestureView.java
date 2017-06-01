@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 
+import com.xtagwgj.calendar.model.MNCalendarConfig;
+
 /**
  * Created by maning on 2017/5/10.
  * 这个类使用了:https://github.com/MorochoRochaDarwin/OneCalendarView
@@ -14,6 +16,9 @@ import android.widget.LinearLayout;
 public class MNGestureView extends LinearLayout {
 
     private boolean canSwap = true;
+
+    //默认横向切换
+    private int SWIPE_MODE = MNCalendarConfig.SWIPE_MODE_HOR;
 
     public MNGestureView(Context context) {
         this(context, null);
@@ -29,11 +34,15 @@ public class MNGestureView extends LinearLayout {
     }
 
     private static final int mWidth = 500;
+    private static final int mHeight = 500;
     private float mDisplacementX;
-    // private float mLastMoveX;
     private float mDisplacementY;
     private float mInitialTx;
+    private float mInitialTy;
     private boolean mTracking;
+
+    private float currentTranslateX;
+    private float currentTranslateY;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -53,6 +62,7 @@ public class MNGestureView extends LinearLayout {
                 mDisplacementY = event.getRawY();
 
                 mInitialTx = getTranslationX();
+                mInitialTy = getTranslationY();
                 break;
 
             case MotionEvent.ACTION_MOVE:
@@ -62,20 +72,41 @@ public class MNGestureView extends LinearLayout {
                 // updatePressedState(false);
 
                 // set the touch and cancel event
-                if ((Math.abs(deltaX) > ViewConfiguration.get(getContext())
-                        .getScaledTouchSlop() * 2 && Math.abs(deltaY) < Math
-                        .abs(deltaX) / 2)
-                        || mTracking) {
 
-                    mTracking = true;
+                if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_HOR) {
+                    if ((Math.abs(deltaX) > ViewConfiguration.get(getContext())
+                            .getScaledTouchSlop() * 2 && Math.abs(deltaY) < Math
+                            .abs(deltaX) / 2)
+                            || mTracking) {
 
-                    if (getTranslationX() <= mWidth / 2
-                            && getTranslationX() >= -(mWidth / 2)) {
+                        mTracking = true;
 
-                        setTranslationX(mInitialTx + deltaX);
-                        break;
+                        if (getTranslationX() <= mWidth / 2
+                                && getTranslationX() >= -(mWidth / 2)) {
+
+//                            setTranslationX(mInitialTx + deltaX);
+                            currentTranslateX = mInitialTx + deltaX;
+                            break;
+                        }
+
                     }
+                } else if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_VER) {
+                    if ((Math.abs(deltaY) > ViewConfiguration.get(getContext())
+                            .getScaledTouchSlop() * 2 && Math.abs(deltaX) < Math
+                            .abs(deltaY) / 2)
+                            || mTracking) {
 
+                        mTracking = true;
+
+                        if (getTranslationY() <= mHeight / 2
+                                && getTranslationY() >= -(mHeight / 2)) {
+
+//                            setTranslationY(mInitialTy + deltaY);
+                            currentTranslateY = mInitialTy + deltaY;
+                            break;
+                        }
+
+                    }
                 }
 
                 break;
@@ -84,26 +115,41 @@ public class MNGestureView extends LinearLayout {
 
                 if (mTracking) {
                     mTracking = false;
-                    float currentTranslateX = getTranslationX();
+//                    float currentTranslateX = getTranslationX();
+//                    float currentTranslateY = getTranslationY();
 
-                    if (currentTranslateX > mWidth / 4) {
-                        onSwipeListener.rightSwipe();
-                    } else if (currentTranslateX < -(mWidth / 4)) {
-                        onSwipeListener.leftSwipe();
+                    if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_HOR) {
+                        if (currentTranslateX > mWidth / 4) {
+                            onSwipeListener.rightSwipe();
+                        } else if (currentTranslateX < -(mWidth / 4)) {
+                            onSwipeListener.leftSwipe();
+                        }
+                    } else if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_VER) {
+                        if (currentTranslateY > mHeight / 4) {
+                            onSwipeListener.topSwipe();
+                        } else if (currentTranslateY < -(mHeight / 4)) {
+                            onSwipeListener.bottomSwipe();
+                        }
                     }
 
 
                     // comment this line if you don't want your frame layout to
                     // take its original position after releasing the touch
                     setTranslationX(0);
+                    setTranslationY(0);
                     break;
                 } else {
                     // handle click event
                     setTranslationX(0);
+                    setTranslationY(0);
                 }
                 break;
         }
         return false;
+    }
+
+    public void setSWIPE_MODE(int SWIPE_MODE) {
+        this.SWIPE_MODE = SWIPE_MODE;
     }
 
     public void setCanSwipe(boolean canSwap) {
@@ -114,6 +160,10 @@ public class MNGestureView extends LinearLayout {
         void rightSwipe();
 
         void leftSwipe();
+
+        void topSwipe();
+
+        void bottomSwipe();
     }
 
 
