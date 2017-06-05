@@ -276,7 +276,6 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 myViewHolder.tvDay.setVisibility(View.VISIBLE);
             }
 
-
             if (this.onCalendarItemClickListener != null && mnCalendarConfig.isMnCalendar_calendarClickable()) {
                 myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -351,7 +350,6 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                                     break;
                             }
-
                         }
                     }
                 });

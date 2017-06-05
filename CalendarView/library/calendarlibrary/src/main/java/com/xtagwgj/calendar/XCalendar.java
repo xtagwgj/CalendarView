@@ -70,9 +70,9 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private ArrayList<Date> chooseDateList;
 
     //区间的开始日期
-    private Date startDate = null;
+    private Date mStartDate = null;
     //区间的结束日期
-    private Date endDate = null;
+    private Date mEndDate = null;
 
     public XCalendar(Context context) {
         this(context, null);
@@ -234,13 +234,13 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         //设置Adapter
         if (mnCalendarAdapter == null) {
             mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, chooseDateList, currentCalendar,
-                    mnCalendarConfig, startDate, endDate);
+                    mnCalendarConfig, mStartDate, mEndDate);
         } else {
-            startDate = mnCalendarAdapter.getStartRangeDate();
-            endDate = mnCalendarAdapter.getEndRangeDate();
+            mStartDate = mnCalendarAdapter.getStartRangeDate();
+            mEndDate = mnCalendarAdapter.getEndRangeDate();
 
             mnCalendarAdapter.refreshAll(mDatas, chooseDateList, currentCalendar,
-                    mnCalendarConfig, startDate, endDate);
+                    mnCalendarConfig, mStartDate, mEndDate);
         }
 
 
@@ -382,10 +382,10 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
      * @param endDate   结束时间
      */
     public void setRangeDate(Date startDate, Date endDate) {
-        this.startDate = parseDate2Zero(startDate);
-        this.endDate = parseDate2Zero(endDate);
+        mStartDate = parseDate2Zero(startDate);
+        mEndDate = parseDate2Zero(endDate);
         if (mnCalendarAdapter != null) {
-            mnCalendarAdapter.refreshRangeDate(startDate, endDate);
+            mnCalendarAdapter.refreshRangeDate(mStartDate, mEndDate);
         } else {
             drawCalendar();
         }
