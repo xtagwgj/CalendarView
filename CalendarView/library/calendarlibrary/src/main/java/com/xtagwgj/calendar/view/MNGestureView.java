@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.xtagwgj.calendar.model.MNCalendarConfig;
 
 /**
- * Created by maning on 2017/5/10.
+ * Created by xtagwgj on 2017/5/10.
  * 这个类使用了:https://github.com/MorochoRochaDarwin/OneCalendarView
  */
 
