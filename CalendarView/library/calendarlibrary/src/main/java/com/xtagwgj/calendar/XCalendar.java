@@ -11,12 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.xtagwgj.calendar.adapter.MNCalendarAdapter;
+import com.xtagwgj.calendar.adapter.XCalendarAdapter;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
 import com.xtagwgj.calendar.listeners.RecyclerViewClickListener;
-import com.xtagwgj.calendar.model.MNCalendarConfig;
-import com.xtagwgj.calendar.view.MNGestureView;
+import com.xtagwgj.calendar.model.XCalendarConfig;
+import com.xtagwgj.calendar.view.XGestureView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private Context context;
 
     private RecyclerView recyclerViewCalendar;
-    private MNGestureView mnGestureView;
+    private XGestureView mnGestureView;
 
     //日期
     private LinearLayout ll_week;
@@ -60,11 +60,11 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private OnCalendarChangeListener onCalendarChangeListener;
 
     //配置信息
-    private MNCalendarConfig mnCalendarConfig = new MNCalendarConfig.Builder().build();
+    private XCalendarConfig mnCalendarConfig = new XCalendarConfig.Builder().build();
 
     //当前的日期
     private Calendar currentCalendar = Calendar.getInstance();
-    private MNCalendarAdapter mnCalendarAdapter;
+    private XCalendarAdapter mnCalendarAdapter;
 
     //选中的日期
     private ArrayList<Date> chooseDateList;
@@ -104,7 +104,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         //绑定View
         View.inflate(context, R.layout.mn_layout_calendar, this);
         recyclerViewCalendar = (RecyclerView) findViewById(R.id.recyclerViewCalendar);
-        mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
+        mnGestureView = (XGestureView) findViewById(R.id.mnGestureView);
         ll_week = (LinearLayout) findViewById(R.id.ll_week);
         tv_week_01 = (TextView) findViewById(R.id.tv_week_01);
         tv_week_02 = (TextView) findViewById(R.id.tv_week_02);
@@ -124,7 +124,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
 
         mnGestureView.setSWIPE_MODE(mnCalendarConfig.getMnCalendar_swipeMode());
         //手势监听
-        mnGestureView.setOnSwipeListener(new MNGestureView.OnSwipeListener() {
+        mnGestureView.setOnSwipeListener(new XGestureView.OnSwipeListener() {
             @Override
             public void rightSwipe() {
                 setLastMonth();
@@ -165,12 +165,12 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
             rl_title_view.setVisibility(View.GONE);
         } else {
             rl_title_view.setVisibility(View.VISIBLE);
-            rl_title_view.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgTitle());
+            rl_title_view.setBackgroundColor(mnCalendarConfig.getTheme().colorBgTitle());
             //标题
             tv_calendar_title.setText(sdf_yyyy_MM.format(getCurrentDate()));
 
             //标题颜色值
-            int mnCalendar_colorTitle = mnCalendarConfig.getMnCalendar_colorTitle();
+            int mnCalendar_colorTitle = mnCalendarConfig.getTheme().colorTitle();
             tv_calendar_title.setTextColor(mnCalendar_colorTitle);
             btn_left.setColorFilter(mnCalendar_colorTitle);
             btn_right.setColorFilter(mnCalendar_colorTitle);
@@ -182,10 +182,10 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
             ll_week.setVisibility(View.GONE);
         } else {
             ll_week.setVisibility(View.VISIBLE);
-            ll_week.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgWeekend());
+            ll_week.setBackgroundColor(mnCalendarConfig.getTheme().colorBgWeekend());
 
             //week的颜色值
-            int mnCalendar_colorWeek = mnCalendarConfig.getMnCalendar_colorWeek();
+            int mnCalendar_colorWeek = mnCalendarConfig.getTheme().colorWeek();
             tv_week_01.setTextColor(mnCalendar_colorWeek);
             tv_week_02.setTextColor(mnCalendar_colorWeek);
             tv_week_03.setTextColor(mnCalendar_colorWeek);
@@ -196,8 +196,8 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         }
 
         //设置分割线的颜色
-        findViewById(R.id.split1).setBackgroundColor(mnCalendarConfig.getMnCalendar_colorSplit());
-        findViewById(R.id.split2).setBackgroundColor(mnCalendarConfig.getMnCalendar_colorSplit());
+        findViewById(R.id.split1).setBackgroundColor(mnCalendarConfig.getTheme().colorSplit());
+        findViewById(R.id.split2).setBackgroundColor(mnCalendarConfig.getTheme().colorSplit());
 
 
         //计算日期
@@ -233,7 +233,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
 
         //设置Adapter
         if (mnCalendarAdapter == null) {
-            mnCalendarAdapter = new MNCalendarAdapter(context, mDatas, chooseDateList, currentCalendar,
+            mnCalendarAdapter = new XCalendarAdapter(context, mDatas, chooseDateList, currentCalendar,
                     mnCalendarConfig, mStartDate, mEndDate);
         } else {
             mStartDate = mnCalendarAdapter.getStartRangeDate();
@@ -245,7 +245,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
 
 
         recyclerViewCalendar.setAdapter(mnCalendarAdapter);
-        recyclerViewCalendar.setBackgroundColor(mnCalendarConfig.getMnCalendar_colorBgCalendar());
+        recyclerViewCalendar.setBackgroundColor(mnCalendarConfig.getTheme().colorBgCalendar());
         recyclerViewCalendar.addOnItemTouchListener(new RecyclerViewClickListener(getContext(), recyclerViewCalendar, null));
 
         //设置Item点击事件
@@ -331,11 +331,11 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
      *
      * @param config 配置
      */
-    public void setConfig(MNCalendarConfig config) {
-        this.mnCalendarConfig = config != null ? config : new MNCalendarConfig.Builder().build();
+    public void setConfig(XCalendarConfig config) {
+        this.mnCalendarConfig = config != null ? config : new XCalendarConfig.Builder().build();
 
         if (mnGestureView != null) {
-            mnGestureView.setCanSwipe(mnCalendarConfig.getMnCalendar_swipeMode() != MNCalendarConfig.SWIPE_MODE_NONE);
+            mnGestureView.setCanSwipe(mnCalendarConfig.getMnCalendar_swipeMode() != XCalendarConfig.SWIPE_MODE_NONE);
             mnGestureView.setSWIPE_MODE(mnCalendarConfig.getMnCalendar_swipeMode());
         }
 
@@ -394,7 +394,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     @Override
     public void setClickable(boolean clickable) {
         super.setClickable(clickable);
-        mnCalendarConfig.setMnCalendar_calendarClickable(clickable);
+        mnCalendarConfig.setXCalendar_calendarClickable(clickable);
     }
 
     @Override

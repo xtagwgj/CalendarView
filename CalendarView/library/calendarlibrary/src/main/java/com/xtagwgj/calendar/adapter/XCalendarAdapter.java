@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.xtagwgj.calendar.R;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
-import com.xtagwgj.calendar.model.MNCalendarConfig;
+import com.xtagwgj.calendar.model.XCalendarConfig;
 import com.xtagwgj.calendar.utils.LunarCalendarUtils;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +27,7 @@ import java.util.Locale;
  * Created by xtagwgj on 2017/5/29.
  */
 
-public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class XCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
 
@@ -42,7 +42,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Date currentDateZero;
 
     //配置文件
-    private MNCalendarConfig mnCalendarConfig;
+    private XCalendarConfig mnCalendarConfig;
 
 
     //选择的日期
@@ -66,9 +66,9 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    public MNCalendarAdapter(Context context, ArrayList<Date> mDatas, ArrayList<Date> chooseDate,
-                             Calendar currentShowCalendar, MNCalendarConfig mnCalendarConfig,
-                             Date startDate, Date endDate) {
+    public XCalendarAdapter(Context context, ArrayList<Date> mDatas, ArrayList<Date> chooseDate,
+                            Calendar currentShowCalendar, XCalendarConfig mnCalendarConfig,
+                            Date startDate, Date endDate) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -82,7 +82,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void refreshAll(ArrayList<Date> mDatas, ArrayList<Date> chooseDate,
-                           Calendar currentShowCalendar, MNCalendarConfig mnCalendarConfig,
+                           Calendar currentShowCalendar, XCalendarConfig mnCalendarConfig,
                            Date startDate, Date endDate) {
 
         this.mDatas = mDatas;
@@ -119,28 +119,28 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             //动态修改颜色
             GradientDrawable grad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
-            grad.setColor(mnCalendarConfig.getMnCalendar_colorBgCalendar());
+            grad.setColor(mnCalendarConfig.getTheme().colorBgCalendar());
 
             // 当前位置未被选中
             if (!chooseDate.contains(datePosition)) {
                 myViewHolder.iv_today_bg.setVisibility(View.GONE);
                 myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
-                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorSolar());
-                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorLunar());
+                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorSolar());
+                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getTheme().colorLunar());
 
             } else if (datePosition.getMonth() == currentShowDate.getMonth() || mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
                 myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                 myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_centre);
-                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
-                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
+                myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
                 //动态修改颜色
                 GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
-                myGrad.setColor(mnCalendarConfig.getMnCalendar_colorRangeBg());
+                myGrad.setColor(mnCalendarConfig.getTheme().colorRangeBg());
             }
 
             //不是本月的颜色变灰
             if (datePosition.getMonth() != currentShowDate.getMonth()) {
-                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorOtherMonth());
+                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorOtherMonth());
             }
 
             //判断是不是当天
@@ -159,7 +159,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             //本月 今日之前的字体颜色变化
             if (datePosition.getMonth() == currentShowDate.getMonth() && datePosition.getTime() < currentDateZero.getTime()) {
-                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorBeforeToday());
+                myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorBeforeToday());
             }
 
             //阴历的显示
@@ -204,7 +204,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 myViewHolder.rlContent.setVisibility(View.VISIBLE);
             }
 
-//            if (mnCalendarConfig.getMnCalendar_chooseType() == MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
+//            if (mnCalendarConfig.getMnCalendar_chooseType() == XCalendarConfig.DATE_CHOOSE_TYPE_RANGE) {
             if (startDate != null || endDate != null) {
                 //判断是不是点击了起始日期
                 if (startDate != null && startDate.getTime() == datePosition.getTime()) {
@@ -216,8 +216,8 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
                     }
 
-                    myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
-                    myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                    myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
+                    myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
 
                     //如果小圆点显示就隐藏
                     if (mnCalendarConfig.isMnCalendar_showRangeText() && ((MyViewHolder) holder).currDayImageView.getVisibility() == View.VISIBLE) {
@@ -226,7 +226,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     //动态修改颜色
                     GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
-                    myGrad.setColor(mnCalendarConfig.getMnCalendar_colorStartAndEndBg());
+                    myGrad.setColor(mnCalendarConfig.getTheme().colorStartAndEndBg());
                 }
 
                 //判断是不是点击了结束日期
@@ -238,8 +238,8 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         myViewHolder.tvDay_lunar.setVisibility(View.VISIBLE);
                         myViewHolder.tvDay_lunar.setText(context.getResources().getString(R.string.prompt_end));
                     }
-                    myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
-                    myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                    myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
+                    myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
 
                     //如果小圆点显示就隐藏
                     if (mnCalendarConfig.isMnCalendar_showRangeText() && ((MyViewHolder) holder).currDayImageView.getVisibility() == View.VISIBLE) {
@@ -248,7 +248,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     //动态修改颜色
                     GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
-                    myGrad.setColor(mnCalendarConfig.getMnCalendar_colorStartAndEndBg());
+                    myGrad.setColor(mnCalendarConfig.getTheme().colorStartAndEndBg());
                 }
 
                 //判断是不是大于起始日期 在区间内
@@ -256,16 +256,16 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     if (datePosition.getTime() > startDate.getTime() && datePosition.getTime() < endDate.getTime()) {
                         myViewHolder.iv_today_bg.setVisibility(View.VISIBLE);
                         myViewHolder.iv_today_bg.setBackgroundResource(R.drawable.mn_selected_bg_centre);
-                        myViewHolder.tvDay.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
-                        myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getMnCalendar_colorRangeText());
+                        myViewHolder.tvDay.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
+                        myViewHolder.tvDay_lunar.setTextColor(mnCalendarConfig.getTheme().colorRangeText());
 
                         //动态修改颜色
                         GradientDrawable myGrad = (GradientDrawable) myViewHolder.iv_today_bg.getBackground();
 
                         if (datePosition.getMonth() != currentShowDate.getMonth() && !mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
-                            myGrad.setColor(mnCalendarConfig.getMnCalendar_colorBgCalendar());
+                            myGrad.setColor(mnCalendarConfig.getTheme().colorBgCalendar());
                         } else {
-                            myGrad.setColor(mnCalendarConfig.getMnCalendar_colorRangeBg());
+                            myGrad.setColor(mnCalendarConfig.getTheme().colorRangeBg());
                         }
                     }
                 }
@@ -293,14 +293,14 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         if (currentShowDate.getMonth() == datePosition.getMonth() || mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
 
                             switch (mnCalendarConfig.getMnCalendar_chooseType()) {
-                                case MNCalendarConfig.DATE_CHOOSE_TYPE_SINGLE:
+                                case XCalendarConfig.DATE_CHOOSE_TYPE_SINGLE:
 
                                     onCalendarItemClickListener.onSingleChoose(datePosition);
 
                                     notifyItemChanged(position);
                                     break;
 
-                                case MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI:
+                                case XCalendarConfig.DATE_CHOOSE_TYPE_MULTI:
 
                                     if (chooseDate.contains(datePosition))
                                         chooseDate.remove(datePosition);
@@ -312,7 +312,7 @@ public class MNCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                     notifyItemChanged(position);
                                     break;
 
-                                case MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE:
+                                case XCalendarConfig.DATE_CHOOSE_TYPE_RANGE:
 
                                     if (startDate != null && endDate != null) {
                                         startDate = null;

@@ -1,7 +1,6 @@
 package com.xtagwgj.calendarviewtest;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,7 +11,7 @@ import android.widget.Toast;
 import com.xtagwgj.calendar.XCalendar;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
-import com.xtagwgj.calendar.model.MNCalendarConfig;
+import com.xtagwgj.calendar.model.XCalendarConfig;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,23 +33,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-        MNCalendarConfig build = new MNCalendarConfig.Builder()
-                .setMnCalendar_showLunar(false)
-                .setMnCalendar_showWeek(true)
-                .setMnCalendar_showOtherMonthInfo(false)
-                .setMnCalendar_showTitle(true)
-                .setMnCalendar_colorBgWeekend(Color.parseColor("#191A1F"))
-                .setMnCalendar_colorWeek(Color.parseColor("#CCCCCC"))
-                .setMnCalendar_colorBgCalendar(Color.parseColor("#1E1F25"))
-                .setMnCalendar_colorBeforeToday(Color.parseColor("#CCCCCC"))
-                .setMnCalendar_colorStartAndEndBg(Color.parseColor("#174254"))
-                .setMnCalendar_colorRangeBg(Color.parseColor("#174254"))
-                .setMnCalendar_colorSolar(Color.parseColor("#FFFFFF"))
-                .setMnCalendar_colorSplit(Color.parseColor("#222427"))
-                .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
-                .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_RANGE)
-                .setMnCalendar_canSelectDayBeforeNow(false)
-                .setMnCalendar_showRangeText(true)
+        XCalendarConfig build = new XCalendarConfig.Builder()
+                .setXCalendar_showLunar(false)
+                .setXCalendar_showWeek(true)
+                .setXCalendar_showOtherMonthInfo(false)
+                .setXCalendar_showTitle(true)
+                .setXCalendar_swipeMode(XCalendarConfig.SWIPE_MODE_VER)
+                .setXCalendar_chooseType(XCalendarConfig.DATE_CHOOSE_TYPE_RANGE)
+                .setXCalendar_canSelectDayBeforeNow(false)
+                .setXCalendar_showRangeText(true)
+                .setTheme(new CustomTheme())
                 .build();
 
         mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
@@ -140,24 +132,24 @@ public class MainActivity extends AppCompatActivity {
                 mnCalendar.set2Today();
                 break;
             case R.id.action_03:
-                MNCalendarConfig build = new MNCalendarConfig.Builder()
-                        .setMnCalendar_colorWeek(Color.parseColor("#00ff00"))
-//                        .setMnCalendar_colorLunar("#FF0000")
-//                        .setMnCalendar_colorSolar("#9BCCAF")
-//                        .setMnCalendar_colorTodayBg("#00FFFF")
-//                        .setMnCalendar_colorTodayText("#000000")
-//                        .setMnCalendar_colorOtherMonth("#F1EDBD")
-//                        .setMnCalendar_colorTitle("#FF0000")
-                        .setMnCalendar_swipeMode(MNCalendarConfig.SWIPE_MODE_VER)
-                        .setMnCalendar_chooseType(MNCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
-                        .setMnCalendar_showLunar(true)
-                        .setMnCalendar_showWeek(true)
-                        .setMnCalendar_showOtherMonthInfo(false)
+                XCalendarConfig build = new XCalendarConfig.Builder()
+//                        .setXCalendar_colorWeek(Color.parseColor("#00ff00"))
+//                        .setXCalendar_colorLunar("#FF0000")
+//                        .setXCalendar_colorSolar("#9BCCAF")
+//                        .setXCalendar_colorTodayBg("#00FFFF")
+//                        .setXCalendar_colorTodayText("#000000")
+//                        .setXCalendar_colorOtherMonth("#F1EDBD")
+//                        .setXCalendar_colorTitle("#FF0000")
+                        .setXCalendar_swipeMode(XCalendarConfig.SWIPE_MODE_VER)
+                        .setXCalendar_chooseType(XCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
+                        .setXCalendar_showLunar(true)
+                        .setXCalendar_showWeek(true)
+                        .setXCalendar_showOtherMonthInfo(false)
                         .build();
                 mnCalendar.setConfig(build);
                 break;
             case R.id.action_04:
-                MNCalendarConfig buildDefault = new MNCalendarConfig.Builder().build();
+                XCalendarConfig buildDefault = new XCalendarConfig.Builder().build();
                 mnCalendar.setConfig(buildDefault);
                 break;
             case R.id.action_10:
@@ -167,20 +159,20 @@ public class MainActivity extends AppCompatActivity {
                 mnCalendar.setNextMonth();
                 break;
             case R.id.action_05:
-                MNCalendarConfig build05 = new MNCalendarConfig.Builder()
-                        .setMnCalendar_showTitle(false)
+                XCalendarConfig build05 = new XCalendarConfig.Builder()
+                        .setXCalendar_showTitle(false)
                         .build();
                 mnCalendar.setConfig(build05);
                 break;
             case R.id.action_06:
-                MNCalendarConfig build06 = new MNCalendarConfig.Builder()
-                        .setMnCalendar_showWeek(false)
+                XCalendarConfig build06 = new XCalendarConfig.Builder()
+                        .setXCalendar_showWeek(false)
                         .build();
                 mnCalendar.setConfig(build06);
                 break;
             case R.id.action_07:
-                MNCalendarConfig build07 = new MNCalendarConfig.Builder()
-                        .setMnCalendar_showLunar(false)
+                XCalendarConfig build07 = new XCalendarConfig.Builder()
+                        .setXCalendar_showLunar(false)
                         .build();
                 mnCalendar.setConfig(build07);
                 break;

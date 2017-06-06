@@ -7,7 +7,6 @@ package com.xtagwgj.calendar.theme;
 
 public abstract class XTheme {
 
-
     /**
      * 标题的背景颜色
      *
@@ -35,6 +34,13 @@ public abstract class XTheme {
      * @return 16进制颜色
      */
     public abstract int colorBgWeekend();
+
+    /**
+     * 今日的背景颜色
+     *
+     * @return 16进制颜色
+     */
+    public abstract int colorBgToday();
 
 
     /**

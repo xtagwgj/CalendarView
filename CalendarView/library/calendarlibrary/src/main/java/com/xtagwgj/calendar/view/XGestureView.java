@@ -6,29 +6,29 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 
-import com.xtagwgj.calendar.model.MNCalendarConfig;
+import com.xtagwgj.calendar.model.XCalendarConfig;
 
 /**
  * Created by xtagwgj on 2017/5/10.
  * 这个类使用了:https://github.com/MorochoRochaDarwin/OneCalendarView
  */
 
-public class MNGestureView extends LinearLayout {
+public class XGestureView extends LinearLayout {
 
     private boolean canSwap = true;
 
     //默认横向切换
-    private int SWIPE_MODE = MNCalendarConfig.SWIPE_MODE_HOR;
+    private int SWIPE_MODE = XCalendarConfig.SWIPE_MODE_HOR;
 
-    public MNGestureView(Context context) {
+    public XGestureView(Context context) {
         this(context, null);
     }
 
-    public MNGestureView(Context context, AttributeSet attrs) {
+    public XGestureView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MNGestureView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XGestureView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
     }
@@ -73,7 +73,7 @@ public class MNGestureView extends LinearLayout {
 
                 // set the touch and cancel event
 
-                if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_HOR) {
+                if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_HOR) {
                     if ((Math.abs(deltaX) > ViewConfiguration.get(getContext())
                             .getScaledTouchSlop() * 2 && Math.abs(deltaY) < Math
                             .abs(deltaX) / 2)
@@ -90,7 +90,7 @@ public class MNGestureView extends LinearLayout {
                         }
 
                     }
-                } else if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_VER) {
+                } else if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_VER) {
                     if ((Math.abs(deltaY) > ViewConfiguration.get(getContext())
                             .getScaledTouchSlop() * 2 && Math.abs(deltaX) < Math
                             .abs(deltaY) / 2)
@@ -118,13 +118,13 @@ public class MNGestureView extends LinearLayout {
 //                    float currentTranslateX = getTranslationX();
 //                    float currentTranslateY = getTranslationY();
 
-                    if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_HOR) {
+                    if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_HOR) {
                         if (currentTranslateX > mWidth / 4) {
                             onSwipeListener.rightSwipe();
                         } else if (currentTranslateX < -(mWidth / 4)) {
                             onSwipeListener.leftSwipe();
                         }
-                    } else if (SWIPE_MODE == MNCalendarConfig.SWIPE_MODE_VER) {
+                    } else if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_VER) {
                         if (currentTranslateY > mHeight / 4) {
                             onSwipeListener.topSwipe();
                         } else if (currentTranslateY < -(mHeight / 4)) {

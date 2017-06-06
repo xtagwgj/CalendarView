@@ -1,19 +1,21 @@
-package com.xtagwgj.calendar.theme;
+package com.xtagwgj.calendarviewtest;
+
+import com.xtagwgj.calendar.theme.XTheme;
 
 /**
  * 默认的日历主题
  * Created by xtagwgj on 2017/6/6.
  */
 
-public class DefaultTheme extends XTheme {
+public class CustomTheme extends XTheme {
     @Override
     public int colorBgTitle() {
-        return 0xFFFFFFFF;
+        return 0xFF191B1F;
     }
 
     @Override
     public int colorTitle() {
-        return 0xFF282828;
+        return 0xFFFFFFFF;
     }
 
     @Override
@@ -33,17 +35,17 @@ public class DefaultTheme extends XTheme {
 
     @Override
     public int colorWeek() {
-        return 0xFF5E5E5E;
+        return 0xFFCCCCCC;
     }
 
     @Override
     public int colorSolar() {
-        return colorTitle();
+        return 0xFFFFFFFF;
     }
 
     @Override
     public int colorLunar() {
-        return 0xFF979797;
+        return 0xFFFFFFFF;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class DefaultTheme extends XTheme {
 
     @Override
     public int colorStartAndEndBg() {
-        return 0xdf0e0e0e;
+        return 0xdf174254;
     }
 
     @Override
@@ -78,6 +80,6 @@ public class DefaultTheme extends XTheme {
 
     @Override
     public int colorSplit() {
-        return 0xFFCCCCCC;
+        return 0xFF222427;
     }
 }

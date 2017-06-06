@@ -65,7 +65,7 @@
 
     </LinearLayout>
 
-    <com.xtagwgj.calendar.view.MNGestureView
+    <com.xtagwgj.calendar.view.XGestureView
         android:id="@+id/mnGestureView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -75,7 +75,7 @@
             android:id="@+id/recyclerViewCalendar"
             style="@style/style_calendar" />
 
-    </com.xtagwgj.calendar.view.MNGestureView>
+    </com.xtagwgj.calendar.view.XGestureView>
 
 
 </LinearLayout>
