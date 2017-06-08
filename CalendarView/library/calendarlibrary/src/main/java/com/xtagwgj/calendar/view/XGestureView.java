@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 
-import com.xtagwgj.calendar.model.XCalendarConfig;
+import com.xtagwgj.calendar.model.SwipeType;
 
 /**
  * Created by xtagwgj on 2017/5/10.
@@ -18,7 +18,7 @@ public class XGestureView extends LinearLayout {
     private boolean canSwap = true;
 
     //默认横向切换
-    private int SWIPE_MODE = XCalendarConfig.SWIPE_MODE_HOR;
+    private int SWIPE_MODE = SwipeType.SWIPE_MODE_HOR;
 
     public XGestureView(Context context) {
         this(context, null);
@@ -73,7 +73,7 @@ public class XGestureView extends LinearLayout {
 
                 // set the touch and cancel event
 
-                if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_HOR) {
+                if (SWIPE_MODE == SwipeType.SWIPE_MODE_HOR) {
                     if ((Math.abs(deltaX) > ViewConfiguration.get(getContext())
                             .getScaledTouchSlop() * 2 && Math.abs(deltaY) < Math
                             .abs(deltaX) / 2)
@@ -90,7 +90,7 @@ public class XGestureView extends LinearLayout {
                         }
 
                     }
-                } else if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_VER) {
+                } else if (SWIPE_MODE == SwipeType.SWIPE_MODE_VER) {
                     if ((Math.abs(deltaY) > ViewConfiguration.get(getContext())
                             .getScaledTouchSlop() * 2 && Math.abs(deltaX) < Math
                             .abs(deltaY) / 2)
@@ -118,13 +118,13 @@ public class XGestureView extends LinearLayout {
 //                    float currentTranslateX = getTranslationX();
 //                    float currentTranslateY = getTranslationY();
 
-                    if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_HOR) {
+                    if (SWIPE_MODE == SwipeType.SWIPE_MODE_HOR) {
                         if (currentTranslateX > mWidth / 4) {
                             onSwipeListener.rightSwipe();
                         } else if (currentTranslateX < -(mWidth / 4)) {
                             onSwipeListener.leftSwipe();
                         }
-                    } else if (SWIPE_MODE == XCalendarConfig.SWIPE_MODE_VER) {
+                    } else if (SWIPE_MODE == SwipeType.SWIPE_MODE_VER) {
                         if (currentTranslateY > mHeight / 4) {
                             onSwipeListener.topSwipe();
                         } else if (currentTranslateY < -(mHeight / 4)) {

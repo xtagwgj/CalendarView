@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.xtagwgj.calendar.XCalendar;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
+import com.xtagwgj.calendar.model.ChooseType;
+import com.xtagwgj.calendar.model.SwipeType;
 import com.xtagwgj.calendar.model.XCalendarConfig;
 
 import java.text.ParseException;
@@ -38,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
                 .setXCalendar_showWeek(true)
                 .setXCalendar_showOtherMonthInfo(false)
                 .setXCalendar_showTitle(true)
-                .setXCalendar_swipeMode(XCalendarConfig.SWIPE_MODE_VER)
-                .setXCalendar_chooseType(XCalendarConfig.DATE_CHOOSE_TYPE_RANGE)
+                .setXCalendar_swipeMode(SwipeType.SWIPE_MODE_VER)
+                .setXCalendar_chooseType(ChooseType.DATE_CHOOSE_TYPE_RANGE)
                 .setXCalendar_canSelectDayBeforeNow(false)
                 .setXCalendar_showRangeText(true)
-                .setTheme(new CustomTheme())
+//                .setTheme(new CustomTheme())
                 .build();
 
         mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
@@ -140,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
 //                        .setXCalendar_colorTodayText("#000000")
 //                        .setXCalendar_colorOtherMonth("#F1EDBD")
 //                        .setXCalendar_colorTitle("#FF0000")
-                        .setXCalendar_swipeMode(XCalendarConfig.SWIPE_MODE_VER)
-                        .setXCalendar_chooseType(XCalendarConfig.DATE_CHOOSE_TYPE_MULTI)
+                        .setXCalendar_swipeMode(SwipeType.SWIPE_MODE_VER)
+                        .setXCalendar_chooseType(ChooseType.DATE_CHOOSE_TYPE_MULTI)
                         .setXCalendar_showLunar(true)
                         .setXCalendar_showWeek(true)
                         .setXCalendar_showOtherMonthInfo(false)

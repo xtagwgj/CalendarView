@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.xtagwgj.calendar.R;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
+import com.xtagwgj.calendar.model.ChooseType;
 import com.xtagwgj.calendar.model.XCalendarConfig;
 import com.xtagwgj.calendar.utils.LunarCalendarUtils;
 
@@ -293,14 +294,14 @@ public class XCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         if (currentShowDate.getMonth() == datePosition.getMonth() || mnCalendarConfig.isMnCalendar_showOtherMonthInfo()) {
 
                             switch (mnCalendarConfig.getMnCalendar_chooseType()) {
-                                case XCalendarConfig.DATE_CHOOSE_TYPE_SINGLE:
+                                case ChooseType.DATE_CHOOSE_TYPE_SINGLE:
 
                                     onCalendarItemClickListener.onSingleChoose(datePosition);
 
                                     notifyItemChanged(position);
                                     break;
 
-                                case XCalendarConfig.DATE_CHOOSE_TYPE_MULTI:
+                                case ChooseType.DATE_CHOOSE_TYPE_MULTI:
 
                                     if (chooseDate.contains(datePosition))
                                         chooseDate.remove(datePosition);
@@ -312,7 +313,7 @@ public class XCalendarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                     notifyItemChanged(position);
                                     break;
 
-                                case XCalendarConfig.DATE_CHOOSE_TYPE_RANGE:
+                                case ChooseType.DATE_CHOOSE_TYPE_RANGE:
 
                                     if (startDate != null && endDate != null) {
                                         startDate = null;

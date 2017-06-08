@@ -15,6 +15,7 @@ import com.xtagwgj.calendar.adapter.XCalendarAdapter;
 import com.xtagwgj.calendar.listeners.OnCalendarChangeListener;
 import com.xtagwgj.calendar.listeners.OnCalendarItemClickListener;
 import com.xtagwgj.calendar.listeners.RecyclerViewClickListener;
+import com.xtagwgj.calendar.model.SwipeType;
 import com.xtagwgj.calendar.model.XCalendarConfig;
 import com.xtagwgj.calendar.view.XGestureView;
 
@@ -335,7 +336,7 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
         this.mnCalendarConfig = config != null ? config : new XCalendarConfig.Builder().build();
 
         if (mnGestureView != null) {
-            mnGestureView.setCanSwipe(mnCalendarConfig.getMnCalendar_swipeMode() != XCalendarConfig.SWIPE_MODE_NONE);
+            mnGestureView.setCanSwipe(mnCalendarConfig.getMnCalendar_swipeMode() != SwipeType.SWIPE_MODE_NONE);
             mnGestureView.setSWIPE_MODE(mnCalendarConfig.getMnCalendar_swipeMode());
         }
 

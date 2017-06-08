@@ -30,22 +30,22 @@ public class CustomTheme extends XTheme {
 
     @Override
     public int colorBgToday() {
-        return colorSolar();
+        return 0xFF282828;
     }
 
     @Override
     public int colorWeek() {
-        return 0xFFCCCCCC;
+        return 0xFF5E5E5E;
     }
 
     @Override
     public int colorSolar() {
-        return 0xFFFFFFFF;
+        return 0xFF282828;
     }
 
     @Override
     public int colorLunar() {
-        return 0xFFFFFFFF;
+        return 0xFF979797;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CustomTheme extends XTheme {
 
     @Override
     public int colorOtherMonth() {
-        return colorLunar();
+        return 0xFF979797;
     }
 
     @Override

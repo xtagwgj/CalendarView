@@ -1,12 +1,7 @@
 package com.xtagwgj.calendar.model;
 
-import android.support.annotation.IntDef;
-
 import com.xtagwgj.calendar.theme.DefaultTheme;
 import com.xtagwgj.calendar.theme.XTheme;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 /**
  * 配置
@@ -14,18 +9,6 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class XCalendarConfig {
-
-    //翻页的方式
-    public static final int SWIPE_MODE_NONE = 0;
-    public static final int SWIPE_MODE_HOR = 1;
-    public static final int SWIPE_MODE_VER = 2;
-
-    //只选择一个日期
-    public static final int DATE_CHOOSE_TYPE_SINGLE = 0;
-    //多个日期，点一次选一次
-    public static final int DATE_CHOOSE_TYPE_MULTI = 1;
-    //时间段选择
-    public static final int DATE_CHOOSE_TYPE_RANGE = 2;
 
     //日历是否显示阴历 : true-显示,false-不显示 (默认显示)
     private boolean xCalendar_showLunar = true;
@@ -44,9 +27,9 @@ public class XCalendarConfig {
     //内容是否可点击
     private boolean xCalendar_calendarClickable = true;
     //滑动的方式
-    private int xCalendar_swipeMode = SWIPE_MODE_HOR;
+    private int xCalendar_swipeMode = SwipeType.SWIPE_MODE_HOR;
     //日期的选择方式
-    private int xCalendar_chooseType = DATE_CHOOSE_TYPE_SINGLE;
+    private int xCalendar_chooseType = ChooseType.DATE_CHOOSE_TYPE_SINGLE;
 
     private XTheme theme = new DefaultTheme();
 
@@ -54,17 +37,6 @@ public class XCalendarConfig {
     private XCalendarConfig() {
     }
 
-    @IntDef({SWIPE_MODE_NONE, SWIPE_MODE_HOR, SWIPE_MODE_VER})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface SwipeType {
-
-    }
-
-    @IntDef({DATE_CHOOSE_TYPE_SINGLE, DATE_CHOOSE_TYPE_MULTI, DATE_CHOOSE_TYPE_RANGE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ChooseType {
-
-    }
 
     public boolean isMnCalendar_showLunar() {
         return xCalendar_showLunar;
