@@ -30,6 +30,24 @@ import java.util.Locale;
  * Created by xtagwgj on 2017/5/29.
  */
 
+/*
+
+        XCalendarConfig build = new XCalendarConfig.Builder()
+                .setXCalendar_showLunar(false)
+                .setXCalendar_showWeek(true)
+                .setXCalendar_showOtherMonthInfo(false)
+                .setXCalendar_showTitle(true)
+                .setXCalendar_swipeMode(SwipeType.SWIPE_MODE_VER)
+                .setXCalendar_chooseType(ChooseType.DATE_CHOOSE_TYPE_RANGE)
+                .setXCalendar_canSelectDayBeforeNow(false)
+                .setXCalendar_showRangeText(true)
+//                .setTheme(new CustomTheme())
+                .build();
+
+       mnCalendar.setConfig(build);
+
+ */
+
 public class XCalendar extends LinearLayout implements View.OnClickListener {
 
     private static final String TAG = "XCalendar";
@@ -57,7 +75,9 @@ public class XCalendar extends LinearLayout implements View.OnClickListener {
     private ImageView btn_right;
     private TextView tv_calendar_title;
 
+    //日历点击监听
     private OnCalendarItemClickListener onCalendarItemClickListener;
+    //日历月份变化的监听
     private OnCalendarChangeListener onCalendarChangeListener;
 
     //配置信息
