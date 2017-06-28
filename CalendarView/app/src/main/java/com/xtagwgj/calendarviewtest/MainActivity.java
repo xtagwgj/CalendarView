@@ -36,15 +36,15 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         XCalendarConfig build = new XCalendarConfig.Builder()
-                .setXCalendar_showLunar(false)
-                .setXCalendar_showWeek(true)
-                .setXCalendar_showOtherMonthInfo(false)
-                .setXCalendar_showTitle(true)
-                .setXCalendar_swipeMode(SwipeType.SWIPE_MODE_VER)
-                .setXCalendar_chooseType(ChooseType.DATE_CHOOSE_TYPE_RANGE)
-                .setXCalendar_canSelectDayBeforeNow(false)
-                .setXCalendar_showRangeText(true)
-//                .setTheme(new CustomTheme())
+                .setXCalendar_showLunar(false)//是否显示阴历
+                .setXCalendar_showWeek(true)//是否显示星期栏
+                .setXCalendar_showOtherMonthInfo(false)//是否显示其他月份的信息
+                .setXCalendar_showTitle(true)//是否显示标题栏
+                .setXCalendar_swipeMode(SwipeType.SWIPE_MODE_VER)//滑动切换的方式
+                .setXCalendar_chooseType(ChooseType.DATE_CHOOSE_TYPE_RANGE)//选择的类型
+                .setXCalendar_canSelectDayBeforeNow(false)//是否可以选择今日之前的日期
+                .setXCalendar_showRangeText(true)//显示区域文本
+                .setTheme(new CustomTheme())//日历的主题 可继承XTheme实现自己的主题
                 .build();
 
         mnCalendar = (XCalendar) findViewById(R.id.mnCalendar);
@@ -85,10 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRangeChoose(Date startDate, Date endDate) {
                 Toast.makeText(context, "单击:" + sdf2.format(startDate.getTime()) + "到" + sdf2.format(endDate.getTime()), Toast.LENGTH_SHORT).show();
-//                mnCalendar.setClickable(false);
-
             }
-
 
         });
 
@@ -128,10 +125,10 @@ public class MainActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                mnCalendar.setCurrentDate(date);
+                mnCalendar.setCurrentDate(date);//跳转到其他月份
                 break;
             case R.id.action_02:
-                mnCalendar.set2Today();
+                mnCalendar.set2Today();//回到今天
                 break;
             case R.id.action_03:
                 XCalendarConfig build = new XCalendarConfig.Builder()
@@ -155,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
                 mnCalendar.setConfig(buildDefault);
                 break;
             case R.id.action_10:
-                mnCalendar.setLastMonth();
+                mnCalendar.setLastMonth();//上一个月
                 break;
             case R.id.action_11:
-                mnCalendar.setNextMonth();
+                mnCalendar.setNextMonth();//下一个月
                 break;
             case R.id.action_05:
                 XCalendarConfig build05 = new XCalendarConfig.Builder()
